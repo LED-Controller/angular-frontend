@@ -1,0 +1,27 @@
+.body{
+  height: 100vh;
+  background-color: #111010;
+}
+.header{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+}
+.headline{
+  padding-left: 1rem;
+  margin: 0rem;
+  width: 80vw;
+  color: rgb(243, 246, 250);
+  font-size: 2rem;
+}
+h1{
+  margin: 0rem;
+  font-size: 2rem;
+}
+.container{
+  width: 20vw;
+}
+.content{
+  height: 80vh;
+}

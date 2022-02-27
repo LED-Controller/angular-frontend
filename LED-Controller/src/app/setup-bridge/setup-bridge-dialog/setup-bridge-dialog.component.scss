@@ -1,0 +1,43 @@
+#body{
+  color: rgb(243, 246, 250);
+}
+::ng-deep .mat-dialog-container {
+  background-color: #111010;
+}
+::ng-deep .mat-divider{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field{
+  width: 100%;
+}
+::ng-deep .mat-form-field-label{
+  color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field-ripple{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-input-element{
+  caret-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #0e73f6;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: #0e73f6;
+}
+::ng-deep .mat-input-element::placeholder{
+  color: #0e73f6;
+}
+.container{
+  padding-top: 1rem;
+ }
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+#space{
+  width: 1rem;
+}

@@ -1,0 +1,68 @@
+<div id="body">
+  <div class="header">
+    <h1 class="headline">Lampen</h1>
+    <div class="add-lamp-container">
+      <button mat-fab color="primary" [routerLink]="'add-lamps'">
+        <mat-icon>add</mat-icon>
+        <div id="infoForNewLamps">
+        4
+        </div>
+      </button>
+    </div>
+  </div>
+  <div class="content">
+    <mat-divider></mat-divider>
+    <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
+        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.id">
+          <div class="card-head">
+            <div class="title">
+              {{lamp.name}}
+            </div>
+            <div class="toggle">
+                <mat-slide-toggle
+                [checked]="checked"
+                [disabled]="disabled">
+                </mat-slide-toggle>
+            </div>
+          </div>
+          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.id }">
+            <div class="slider-container">
+              <div class="slider">
+                <mat-icon>wb_sunny</mat-icon>
+                <div id="spacer"></div>
+                <mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="1000"
+                  step="1000"
+                  min="0"
+                  max="100000"
+                  aria-label="units">
+                </mat-slider>
+              </div>
+              <div class="slider">
+                <mat-icon>brush</mat-icon>
+                <div id="spacer"></div>
+                <mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="1000"
+                  step="1000"
+                  min="0"
+                  max="100000"
+                  aria-label="units">
+                </mat-slider>
+              </div>
+            </div>
+            <div class="configure-container">
+              <button mat-fab color="primary">
+                <mat-icon>color_lens</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <led-nav-bar></led-nav-bar>
+</div>

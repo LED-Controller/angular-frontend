@@ -1,0 +1,121 @@
+#body{
+  background-color: #111010;
+  height: 100vh;
+}
+.header{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+.headline{
+  padding-left: 1rem;
+  margin: 0rem;
+  width: 50vw;
+  color: rgb(243, 246, 250);
+  font-size: 2rem;
+}
+.add-lamp-container{
+  width: 50vw;
+  display: flex;
+  justify-content: right;
+  padding-right: 1rem;
+}
+#infoForNewLamps{
+margin-left: 2rem;
+width: 24px;
+height: 24px;
+border-radius: 50%;
+background-color: crimson;
+display: grid;
+align-items: center;
+justify-items: center;
+}
+.content{
+  height: 80vh;
+  overflow: auto;
+}
+//cards
+.card-container{
+  padding-top: 1rem;
+  display: grid;
+  justify-items: center;
+}
+.mat-card{
+  background-color: rgba(255,255, 255, 0.1);
+  border-style: solid;
+  border-color: rgba(0,0, 0, 0);
+  width: 96vw;
+  border-radius: 1rem;
+}
+.card-head{
+  display: flex;
+  height: 6vh;
+}
+.title{
+  width: 70%;
+  align-items: center;
+  display: flex;
+  color: rgb(243, 246, 250);
+  font-size: 1.5rem;
+  padding: 0rem;
+  line-height: 1.5rem;
+}
+.card-expand{
+  height: 0vh;
+  visibility: collapse;
+}
+.card-expand-show{
+  height: auto;
+  visibility: visible;
+  display: flex;
+  padding-top: 16px;
+}
+.slider-container{
+  width: 70%;
+
+}
+.configure-container{
+  width: 30%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.slider{
+  display: flex;
+  align-items: center;
+  color: rgb(243, 246, 250);
+}
+#spacer{
+  width: 1rem;
+}
+.toggle{
+  width: 30%;
+  display: grid;
+  justify-items: right;
+  align-items: center;
+  padding-right: 1rem;
+}
+.selected{
+  border-style: solid;
+  border-color: #0e73f6;
+}
+::ng-deep .mat-slide-toggle-label{
+  margin: 0rem;
+}
+/*
+.mat-fab.mat-primary{
+  background-color: #0e73f6;
+}*/
+::ng-deep .card-expand-show .mat-divider{
+  background-color: rgba(0,0,0,0.3);
+}
+.icon{
+  color: rgb(243, 246, 250);
+  width: 20%;
+}
+.slid{
+  width: 80%;
+}
+.mat-slider{
+  width: 100%;
+}

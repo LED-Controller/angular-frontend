@@ -1,0 +1,28 @@
+.bottom-navigation{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 9.9vh;
+}
+::ng-deep .mat-icon-button{
+  height: 100%;
+  width: 100%;
+}
+::ng-deep .mat-icon-button .mat-icon{
+  font-size: 3rem;
+  padding-right: 3rem;
+}
+::ng-deep .bottom-navigation .mat-fab .mat-button-wrapper{
+  padding: 0rem;
+}
+::ng-deep .bottom-navigation .mat-fab.mat-primary {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 0%),
+              0px 6px 10px 0px rgb(0 0 0 / 0%),
+              0px 1px 18px 0px rgb(0 0 0 / 0%);
+}
+::ng-deep .bottom-navigation .mat-icon{
+  font-size: 2.5rem;
+  height: auto;
+  width: auto;
+}

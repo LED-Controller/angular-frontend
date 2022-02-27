@@ -1,0 +1,22 @@
+<div id="body">
+  <h1>Mit Bridge verbinden</h1>
+  <mat-divider></mat-divider>
+  <div class="container">
+  <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
+    <mat-label>IP-Adresse</mat-label>
+    <input matInput placeholder="">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="buttons">
+  <button mat-stroked-button color="primary" mat-dialog-close>Abbruch</button>
+  <span id="space"></span>
+  <button mat-raised-button color="primary" [routerLink]="'lamp-list'" [mat-dialog-close]="true">Verbinden</button>
+</div>
+</div>
