@@ -4,8 +4,8 @@
     <div class="add-lamp-container">
       <button mat-fab color="primary" [routerLink]="'add-lamps'">
         <mat-icon>add</mat-icon>
-        <div id="infoForNewLamps" *ngIf="countNewLamps > 0">
-        {{countNewLamps}}
+        <div id="infoForNewLamps" *ngIf="countUnconLamps > 0">
+        {{countUnconLamps}}
         </div>
       </button>
     </div>
@@ -20,7 +20,7 @@
             </div>
             <div class="toggle">
                 <mat-slide-toggle
-                [checked]="checked"
+                [checked]="lamp.isOn"
                 [disabled]="disabled">
                 </mat-slide-toggle>
             </div>
@@ -33,6 +33,7 @@
                 <mat-slider
                   thumbLabel
                   [displayWith]="formatLabel"
+                  [value]="lamp.brightness* 1000"
                   tickInterval="1000"
                   step="1000"
                   min="0"

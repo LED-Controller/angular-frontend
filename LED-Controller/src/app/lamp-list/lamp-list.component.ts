@@ -1,6 +1,8 @@
-import { style } from '@angular/animations';
-import { Component, HostListener,ElementRef, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { LampsService } from '../services/lamps.service';
+import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service';
+import { Lamp } from '../interfaces/lamp';
 
 
 @Component({
@@ -10,31 +12,36 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
-checked = false;
 disabled = false;
 index=0;
 selectedItem = null;
+countUnconLamps = 0;
+lamps: Lamp[] = [];
+unconfiguredLamps: Lamp[] = [];
 
-countNewLamps = 0;
-  constructor() { }
+  constructor(private lampsService: LampsService,
+              private unconfiguredLampsService: UnconfiguredLampsService) { }
 
-  ngOnInit(): void {
-    this.index=0;
-    this.selectedItem = null;
-    this.countNewLamps = 0;
-    this.newLamps.forEach(element => {
-      this.countNewLamps++;
+  getLamps(): void {
+    this.lamps = this.lampsService.getLamps();
+  }
+  getUnconfiguredLamps(): void {
+    this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
+  }
+  countUnconfiguredLamps(): void {
+    this.countUnconLamps = 0;
+    this.unconfiguredLamps.forEach(element => {
+      this.countUnconLamps++;
     });
   }
+  ngOnInit(): void {
+    this.getLamps();
+    this.getUnconfiguredLamps();
+    this.countUnconfiguredLamps();
+    this.index=0;
+    this.selectedItem = null;
+  }
 
-  public newLamps = [
-    {id: 1, name: "XGZUWLK7483949"},
-    {id: 2, name: "POIIOSH1122830"}
-  ];
-  public lamps = [
-    {id: 1, name: 'Wohnzimmer LED-Streifen'},
-    {id: 2, name: 'Küchen LED-Streifen'},
-  ];
   focuse(item:any): void {
     this.selectedItem = item;
   }

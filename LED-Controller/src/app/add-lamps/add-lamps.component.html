@@ -11,9 +11,9 @@
   </div>
   <div class="content">
     <mat-divider></mat-divider>
-    <div class="button-container" *ngFor="let newLamp of newLamps">
+    <div class="button-container" *ngFor="let unconfiguredLamp of unconfiguredLamps">
       <button mat-raised-button color="primary" class="newLampButtons">
-        {{newLamp.name}}
+        {{unconfiguredLamp.name}}
         <mat-icon>keyboard_arrow_right</mat-icon>
         <!--
         <mat-icon>add</mat-icon>
