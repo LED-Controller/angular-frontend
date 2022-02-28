@@ -1,15 +1,26 @@
 <div class="body">
   <div class="header">
     <div class="headline">
-      <h1>Lampen hinzufügen</h1>
+      <h1>Lampen suchen</h1>
     </div>
     <div class="container">
-
+      <button mat-fab color="primary">
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
   </div>
   <div class="content">
     <mat-divider></mat-divider>
-
+    <div class="button-container" *ngFor="let newLamp of newLamps">
+      <button mat-raised-button color="primary" class="newLampButtons">
+        {{newLamp.name}}
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <!--
+        <mat-icon>add</mat-icon>
+        <mat-icon>tune</mat-icon>
+      -->
+      </button>
+    </div>
   </div>
   <mat-divider></mat-divider>
   <led-nav-bar></led-nav-bar>

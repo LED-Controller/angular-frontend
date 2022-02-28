@@ -4,11 +4,11 @@
   justify-items: center;
   height: 9.9vh;
 }
-::ng-deep .mat-icon-button{
+::ng-deep .bottom-navigation .mat-icon-button{
   height: 100%;
   width: 100%;
 }
-::ng-deep .mat-icon-button .mat-icon{
+::ng-deep .bottom-navigation .mat-icon-button .mat-icon{
   font-size: 3rem;
   padding-right: 3rem;
 }

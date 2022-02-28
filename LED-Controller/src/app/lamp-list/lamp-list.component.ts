@@ -12,28 +12,41 @@ export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
 checked = false;
 disabled = false;
+index=0;
+selectedItem = null;
+
+countNewLamps = 0;
   constructor() { }
 
   ngOnInit(): void {
+    this.index=0;
+    this.selectedItem = null;
+    this.countNewLamps = 0;
+    this.newLamps.forEach(element => {
+      this.countNewLamps++;
+    });
   }
 
+  public newLamps = [
+    {id: 1, name: "XGZUWLK7483949"},
+    {id: 2, name: "POIIOSH1122830"}
+  ];
   public lamps = [
     {id: 1, name: 'Wohnzimmer LED-Streifen'},
     {id: 2, name: 'Küchen LED-Streifen'},
   ];
-
-  selectedItem = null;
   focuse(item:any): void {
     this.selectedItem = item;
   }
-  index=0;
+
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
     let elements: string[] = []
     event.path.forEach((element: any) => {
       elements.push(element.className)
+      console.log(element.className)
     })
-    if(!elements.includes("card-container")) {
+    if(!(elements.includes("card-container ng-star-inserted") ||elements.includes("card-container"))) {
       this.selectedItem = null;
       this.index=-1;
     }

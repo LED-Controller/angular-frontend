@@ -14,7 +14,7 @@ export class SetupBridgeComponent implements OnInit {
   ngOnInit(): void {
   }
   openDialog() {
-    const dialogRef = this.dialog.open(SetupBridgeDialogComponent);
+    const dialogRef = this.dialog.open(SetupBridgeDialogComponent, {panelClass: 'setup-dialog'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

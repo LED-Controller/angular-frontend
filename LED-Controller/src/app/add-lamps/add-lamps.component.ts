@@ -11,5 +11,9 @@ export class AddLampsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  newLamps = [
+    {id: 1, name: "XGZUWLK7483949"},
+    {id: 2, name: "POIIOSH1122830"}
+  ];
 
 }

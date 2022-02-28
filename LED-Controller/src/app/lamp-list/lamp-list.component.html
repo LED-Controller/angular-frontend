@@ -4,8 +4,8 @@
     <div class="add-lamp-container">
       <button mat-fab color="primary" [routerLink]="'add-lamps'">
         <mat-icon>add</mat-icon>
-        <div id="infoForNewLamps">
-        4
+        <div id="infoForNewLamps" *ngIf="countNewLamps > 0">
+        {{countNewLamps}}
         </div>
       </button>
     </div>
