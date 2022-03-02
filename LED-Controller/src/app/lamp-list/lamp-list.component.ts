@@ -80,4 +80,8 @@ unconfiguredLamps: Lamp[] = [];
       }
       return value;
     }
+    //
+    test():void{
+      console.log(this.lampsService.randomize().subscribe());
+    }
 }
