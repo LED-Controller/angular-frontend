@@ -1,1 +1,21 @@
-<p>lamp-dialog works!</p>
+<div class="body-lamp">
+  <div class="lamp-name">
+    <h1>{{lamp.name}}</h1>
+  </div>
+  <div class="color-picker-container">
+    <div id="color-picker"></div>
+    <div id="brightness-slider">
+      <mat-icon>wb_sunny</mat-icon>
+      <div id="spacer"></div>
+      <mat-slider
+      thumbLabel
+      [displayWith]="formatLabel"
+      tickInterval="1000"
+      step="1000"
+      min="0"
+      max="100000"
+      aria-label="units">
+    </mat-slider>
+    </div>
+  </div>
+</div>
