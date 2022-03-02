@@ -20,6 +20,8 @@ export class AddLampsComponent implements OnInit {
   ngOnInit(): void {
     this.getUnconfiguredLamps();
   }
-
+  refresh(): void {
+    this.getUnconfiguredLamps();
+  }
 
 }

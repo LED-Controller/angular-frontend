@@ -41,7 +41,11 @@ unconfiguredLamps: Lamp[] = [];
     this.index=0;
     this.selectedItem = null;
   }
-
+  refresh(): void {
+    this.getLamps();
+    this.getUnconfiguredLamps();
+    this.countUnconfiguredLamps();
+  }
   focuse(item:any): void {
     this.selectedItem = item;
   }
