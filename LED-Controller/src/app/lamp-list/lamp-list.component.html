@@ -13,7 +13,7 @@
   <div class="content">
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.id">
+        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.mac">
           <div class="card-head">
             <div class="title">
               {{lamp.name}}
@@ -25,7 +25,7 @@
                 </mat-slide-toggle>
             </div>
           </div>
-          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.id }">
+          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.mac }">
             <div class="slider-container">
               <div class="slider">
                 <mat-icon>wb_sunny</mat-icon>

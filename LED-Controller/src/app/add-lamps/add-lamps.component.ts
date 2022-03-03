@@ -11,7 +11,7 @@ export class AddLampsComponent implements OnInit {
 
   constructor(private unconfiguredLampsService: UnconfiguredLampsService) { }
 
-  unconfiguredLamps: Lamp[] = [];
+  unconfiguredLamps: string[] = [];
 
   getUnconfiguredLamps(): void {
     this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();

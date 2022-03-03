@@ -15,11 +15,11 @@ import { MatDialog } from '@angular/material/dialog';
 export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
 disabled = false;
-index=0;
+index="";
 selectedItem = null;
 countUnconLamps = 0;
 lamps: Lamp[] = [];
-unconfiguredLamps: Lamp[] = [];
+unconfiguredLamps: string[] = [];
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
@@ -41,7 +41,7 @@ unconfiguredLamps: Lamp[] = [];
     this.getLamps();
     this.getUnconfiguredLamps();
     this.countUnconfiguredLamps();
-    this.index=0;
+    this.index="";
     this.selectedItem = null;
   }
   refresh(): void {
@@ -74,7 +74,7 @@ unconfiguredLamps: Lamp[] = [];
       }})
     if(!found) {
       this.selectedItem = null;
-      this.index=-1;
+      this.index="";
     }
   }
   formatLabel(value: number) {

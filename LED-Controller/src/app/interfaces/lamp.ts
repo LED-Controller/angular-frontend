@@ -1,9 +1,11 @@
+import { Color } from './color';
+import { LightType } from './lightType';
 export interface Lamp {
-  id: number,
+  mac: string,
   name: string,
-  modell: string,
+  art: LightType,
   isOn: boolean,
-  color: string,
+  isOnline: boolean,
+  color: Color,
   brightness: number,
-  room: string,
 }
