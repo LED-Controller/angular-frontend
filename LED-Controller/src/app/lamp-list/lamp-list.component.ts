@@ -3,6 +3,8 @@ import { ThemePalette } from '@angular/material/core';
 import { LampsService } from '../services/lamps.service';
 import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service';
 import { Lamp } from '../interfaces/lamp';
+import { LampDialogComponent } from './lamp-dialog/lamp-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -20,7 +22,8 @@ lamps: Lamp[] = [];
 unconfiguredLamps: Lamp[] = [];
 
   constructor(private lampsService: LampsService,
-              private unconfiguredLampsService: UnconfiguredLampsService) { }
+              private unconfiguredLampsService: UnconfiguredLampsService,
+              public dialog: MatDialog) { }
 
   getLamps(): void {
     this.lamps = this.lampsService.getLamps();
@@ -50,22 +53,38 @@ unconfiguredLamps: Lamp[] = [];
     this.selectedItem = item;
   }
 
+  openDialog(lamp: Lamp) {
+    console.log(lamp);
+    const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
-    let elements: string[] = []
+    let found: boolean = false
     event.path.forEach((element: any) => {
-      elements.push(element.className)
-      console.log(element.className)
-    })
-    if(!(elements.includes("card-container ng-star-inserted") ||elements.includes("card-container"))) {
+      if(element.className !== undefined){
+        if(element.className.includes("card-container")||element.className.includes("mat-dialog-container")){
+          found = true
+        }
+      }})
+    if(!found) {
       this.selectedItem = null;
       this.index=-1;
     }
+  }
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + '%';
     }
-    formatLabel(value: number) {
-      if (value >= 1000) {
-        return Math.round(value / 1000) + '%';
-      }
-      return value;
-    }
+    return value;
+  }
+  //
+  test():void{
+    this.lampsService.randomize().subscribe();
+
+  }
 }

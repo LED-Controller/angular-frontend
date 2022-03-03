@@ -1,0 +1,59 @@
+::ng-deep .mat-dialog-container {
+  background: #111010;
+  color: rgb(243, 246, 250);
+}
+.lamp-name h1{
+  text-align: center;
+}
+.head-panel{
+  height: 3vh;
+}
+.random-container{
+width: 50%;
+display: flex;
+float: left;
+}
+.toggle-button{
+float: right;
+}
+.slider-container{
+  width: 100%;
+}
+.slider{
+  display: flex;
+  align-items: center;
+  color: rgb(243, 246, 250);
+}
+#spacer{
+  width: 1rem;
+}
+.mat-slider{
+  width: 70%;
+}
+.neopixel-buttons-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.submit-button{
+  padding-top: 24px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+::ng-deep .mat-focus-indicator .random .mat-fab.mat-primary{
+  width: 36px;
+  height: 36px;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb-label{
+  background-color: white;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb-label-text{
+  color: #000000;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-track-fill{
+  background-color: white;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb{
+  background-color: white;
+}

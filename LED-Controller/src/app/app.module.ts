@@ -23,7 +23,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 
-
+import { HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +36,7 @@ import {MatSliderModule} from '@angular/material/slider';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
     MatButtonModule,

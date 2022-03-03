@@ -40,7 +40,7 @@
                   max="100000"
                   aria-label="units">
                 </mat-slider>
-              </div>
+              </div><!--
               <div class="slider">
                 <mat-icon>brush</mat-icon>
                 <div id="spacer"></div>
@@ -54,15 +54,21 @@
                   aria-label="units">
                 </mat-slider>
               </div>
+              -->
             </div>
             <div class="configure-container">
-              <button mat-fab color="primary">
+              <button mat-fab color="primary" (click)="openDialog(lamp)">
                 <mat-icon>color_lens</mat-icon>
               </button>
             </div>
           </div>
         </mat-card>
     </div>
+  </div>
+  <div id="randomContainer">
+    <button mat-fab color="primary" (click)="test()">
+      <mat-icon>shuffle</mat-icon>
+    </button>
   </div>
   <mat-divider></mat-divider>
   <led-nav-bar></led-nav-bar>
