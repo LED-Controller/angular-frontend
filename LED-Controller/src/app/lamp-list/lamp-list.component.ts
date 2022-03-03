@@ -66,7 +66,8 @@ unconfiguredLamps: Lamp[] = [];
   clickout(event: any) {
     let found: boolean = false
     event.path.forEach((element: any) => {
-      if(element.className !== undefined){
+      console.dir(element)
+      if(element.className !== undefined && element.localName !== "circle" && element.localName !== "svg"){
         if(element.className.includes("card-container")||element.className.includes("mat-dialog-container")){
           found = true
         }
