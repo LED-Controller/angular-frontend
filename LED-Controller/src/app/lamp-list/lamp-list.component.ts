@@ -64,24 +64,27 @@ unconfiguredLamps: Lamp[] = [];
 
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
-    let elements: string[] = []
+    let found: boolean = false
     event.path.forEach((element: any) => {
-      elements.push(element.className)
-      console.log(element.className)
-    })
-    if(!(elements.includes("card-container ng-star-inserted") ||elements.includes("card-container"))) {
+      if(element.className !== undefined){
+        if(element.className.includes("card-container")||element.className.includes("mat-dialog-container")){
+          found = true
+        }
+      }})
+    if(!found) {
       this.selectedItem = null;
       this.index=-1;
     }
+  }
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + '%';
     }
-    formatLabel(value: number) {
-      if (value >= 1000) {
-        return Math.round(value / 1000) + '%';
-      }
-      return value;
-    }
-    //
-    test():void{
-      console.log(this.lampsService.randomize().subscribe());
-    }
+    return value;
+  }
+  //
+  test():void{
+    this.lampsService.randomize().subscribe();
+
+  }
 }
