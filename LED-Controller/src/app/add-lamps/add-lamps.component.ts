@@ -22,6 +22,7 @@ export class AddLampsComponent implements OnInit {
   }
   refresh(): void {
     this.getUnconfiguredLamps();
+    console.log("refresh")
   }
 
 }

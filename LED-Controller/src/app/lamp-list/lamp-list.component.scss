@@ -31,15 +31,8 @@ align-items: center;
 justify-items: center;
 }
 .content{
-  //height: 80vh;
-  height: 70vh; //nach präsentation entfernen
+  height: 80vh;
   overflow: auto;
-}
-#randomContainer{
-  height: 10vh;
-  display: grid;
-  align-items: center;
-  justify-items: center;
 }
 //cards
 .card-container{

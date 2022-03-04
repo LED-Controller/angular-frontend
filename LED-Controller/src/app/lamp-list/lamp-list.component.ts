@@ -1,10 +1,12 @@
+import { ToolCaseService } from './../services/tool-case.service';
+import { Lamp } from './../interfaces/lamp';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { LampsService } from '../services/lamps.service';
 import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service';
-import { Lamp } from '../interfaces/lamp';
 import { LampDialogComponent } from './lamp-dialog/lamp-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 
 @Component({
@@ -23,20 +25,8 @@ unconfiguredLamps: string[] = [];
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
+              private toolCaseService: ToolCaseService,
               public dialog: MatDialog) { }
-
-  getLamps(): void {
-    this.lamps = this.lampsService.getLamps();
-  }
-  getUnconfiguredLamps(): void {
-    this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
-  }
-  countUnconfiguredLamps(): void {
-    this.countUnconLamps = 0;
-    this.unconfiguredLamps.forEach(element => {
-      this.countUnconLamps++;
-    });
-  }
   ngOnInit(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
@@ -44,31 +34,53 @@ unconfiguredLamps: string[] = [];
     this.index="";
     this.selectedItem = null;
   }
+  //call services
+  getLamps(): void {
+    //this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps);
+    this.lamps = this.lampsService.getLamps();
+  }
   refresh(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
     this.countUnconfiguredLamps();
+    console.log("refresh")
+  }
+  getUnconfiguredLamps(): void {
+    this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
+  }
+  changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
+    lamp.isOn = this.toolCaseService.changeIsOnState(event)
+    //this.lampsService.updateLamp(lamp).subscribe();
+    //this.getLamps()
+  }
+  changeBrightness(event: any, lamp: Lamp) {
+    lamp.brightness = this.toolCaseService.changeBrightness(event)
+    //this.lampsService.updateLamp(lamp).subscribe();
+    //this.getLamps()
+  }
+  //define own services
+  countUnconfiguredLamps(): void {
+    this.countUnconLamps = 0;
+    this.unconfiguredLamps.forEach(element => {
+      this.countUnconLamps++;
+    });
   }
   focuse(item:any): void {
     this.selectedItem = item;
   }
-
   openDialog(lamp: Lamp) {
-    console.log(lamp);
-    const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp});
+    const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp},);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
-
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
     let found: boolean = false
     event.path.forEach((element: any) => {
-      console.dir(element)
       if(element.className !== undefined && element.localName !== "circle" && element.localName !== "svg"){
-        if(element.className.includes("card-container")||element.className.includes("mat-dialog-container")){
+        if(element.className.includes("card-container")||element.className.includes("mat-dialog-container")||element.className.includes("cdk-overlay-container")){
           found = true
         }
       }})
@@ -82,10 +94,5 @@ unconfiguredLamps: string[] = [];
       return Math.round(value / 1000) + '%';
     }
     return value;
-  }
-  //
-  test():void{
-    this.lampsService.randomize().subscribe();
-
   }
 }

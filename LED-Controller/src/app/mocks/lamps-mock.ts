@@ -6,7 +6,7 @@ export const Lamps: Lamp[] = [
       name: 'Wohnzimmer LED-Streifen',
       art: LightType.RGB,
       isOn: true,
-      isOnline: true,
+      isOnline: false,
       color: {r: 255,g:66,b:122,w:-1},
       brightness: 67,
     },
