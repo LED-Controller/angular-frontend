@@ -1,19 +1,21 @@
+import { LightType } from './../interfaces/lightType';
 import { Lamp } from "../interfaces/lamp";
 
 export const Lamps: Lamp[] = [
-    { id: 1,
+    { mac: "008041aefd7e",
       name: 'Wohnzimmer LED-Streifen',
-      modell: "rgb",
+      art: LightType.RGB,
       isOn: true,
-      color: "125,80,110",
+      isOnline: false,
+      color: {r: 255,g:66,b:122,w:-1},
       brightness: 67,
-      room:"Wohnzimmer",
     },
-    { id: 2,
+    { mac: "119152bfge8f",
       name: 'Küchen LED-Streifen',
-      modell: "rgbw",
+      art: LightType.NEOPIXEL,
       isOn: false,
-      color: "0,255,100",
+      isOnline: true,
+      color: {r: 44,g:166,b:255,w:-1},
       brightness: 100,
-      room:"Küche",},
+    },
 ]

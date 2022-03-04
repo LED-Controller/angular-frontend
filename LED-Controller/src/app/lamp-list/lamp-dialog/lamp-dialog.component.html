@@ -4,13 +4,14 @@
   </div>
   <div class="head-panel">
     <div class="random-container">
-      <button mat-icon-button color="basic" class="random">
+      <button mat-icon-button color="basic" class="random" (click)="randomMode()">
         <mat-icon>shuffle</mat-icon>
       </button>
     </div>
     <div class="toggle-button">
       <mat-slide-toggle
-      [checked]="lamp.isOn">
+      [checked]="lamp.isOn"
+      (change)="changeIsOnState($event)">
       </mat-slide-toggle>
     </div>
   </div>
@@ -28,7 +29,8 @@
           step="1000"
           min="0"
           max="100000"
-          aria-label="units">
+          aria-label="units"
+          (input)="changeBrightness($event)">
         </mat-slider>
     </div>
   </div>
@@ -50,6 +52,6 @@
   </div>
   <mat-divider></mat-divider>
   <div class="submit-button">
-    <button mat-raised-button color="primary" mat-dialog-close>Fertig</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="onClose()">Fertig</button>
   </div>
 </div>

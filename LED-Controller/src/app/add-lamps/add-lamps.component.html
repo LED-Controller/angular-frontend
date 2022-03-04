@@ -1,4 +1,4 @@
-<div class="body" (focus)="refresh()">
+<div class="body">
   <div class="header">
     <div class="headline">
       <h1>Lampen suchen</h1>
@@ -13,7 +13,7 @@
     <mat-divider></mat-divider>
     <div class="button-container" *ngFor="let unconfiguredLamp of unconfiguredLamps">
       <button mat-raised-button color="primary" class="newLampButtons">
-        {{unconfiguredLamp.name}}
+        {{unconfiguredLamp}}
         <mat-icon>keyboard_arrow_right</mat-icon>
         <!--
         <mat-icon>add</mat-icon>

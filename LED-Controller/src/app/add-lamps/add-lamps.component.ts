@@ -11,7 +11,7 @@ export class AddLampsComponent implements OnInit {
 
   constructor(private unconfiguredLampsService: UnconfiguredLampsService) { }
 
-  unconfiguredLamps: Lamp[] = [];
+  unconfiguredLamps: string[] = [];
 
   getUnconfiguredLamps(): void {
     this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
@@ -22,6 +22,7 @@ export class AddLampsComponent implements OnInit {
   }
   refresh(): void {
     this.getUnconfiguredLamps();
+    console.log("refresh")
   }
 
 }

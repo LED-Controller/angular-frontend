@@ -13,7 +13,7 @@
   <div class="content">
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.id">
+        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.mac">
           <div class="card-head">
             <div class="title">
               {{lamp.name}}
@@ -21,11 +21,12 @@
             <div class="toggle">
                 <mat-slide-toggle
                 [checked]="lamp.isOn"
-                [disabled]="disabled">
+                [disabled]="disabled"
+                (change)="changeIsOnState(lamp, $event)">
                 </mat-slide-toggle>
             </div>
           </div>
-          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.id }">
+          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.mac }">
             <div class="slider-container">
               <div class="slider">
                 <mat-icon>wb_sunny</mat-icon>
@@ -38,23 +39,10 @@
                   step="1000"
                   min="0"
                   max="100000"
-                  aria-label="units">
-                </mat-slider>
-              </div><!--
-              <div class="slider">
-                <mat-icon>brush</mat-icon>
-                <div id="spacer"></div>
-                <mat-slider
-                  thumbLabel
-                  [displayWith]="formatLabel"
-                  tickInterval="1000"
-                  step="1000"
-                  min="0"
-                  max="100000"
-                  aria-label="units">
+                  aria-label="units"
+                  (input)="changeBrightness($event, lamp)">
                 </mat-slider>
               </div>
-              -->
             </div>
             <div class="configure-container">
               <button mat-fab color="primary" (click)="openDialog(lamp)">
@@ -64,11 +52,6 @@
           </div>
         </mat-card>
     </div>
-  </div>
-  <div id="randomContainer">
-    <button mat-fab color="primary" (click)="test()">
-      <mat-icon>shuffle</mat-icon>
-    </button>
   </div>
   <mat-divider></mat-divider>
   <led-nav-bar></led-nav-bar>

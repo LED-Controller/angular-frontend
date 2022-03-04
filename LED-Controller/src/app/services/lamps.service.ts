@@ -1,7 +1,7 @@
+import { Lamp } from './../interfaces/lamp';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Lamp } from '../interfaces/lamp';
 import { Lamps } from '../mocks/lamps-mock';
 
 @Injectable({
@@ -15,7 +15,21 @@ export class LampsService {
   getLamps(): Lamp[] {
     return Lamps;
   }
-  randomize(): Observable<void> {
-    return this.httpClient.get<void>(`http://localhost:8080/random`);
+  /*
+  getLamps(): Observable<Lamp[]> {
+    return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`);
+  }
+  */
+  getLamp(lamp: Lamp): Observable<Lamp>{
+    return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
+  }
+  updateLamp(lamp: Lamp): Observable<Lamp> {
+    return this.httpClient.post<Lamp>(`http://localhost:8080/update/${lamp.mac}`,lamp);
+  }
+  deleteLamp(lamp: Lamp): Observable<void> {
+    return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
+  }
+  randomize(lamp: Lamp): Observable<Lamp> {
+    return this.httpClient.post<Lamp>(`http://localhost:8080/random/${lamp.mac}`,lamp);
   }
 }
