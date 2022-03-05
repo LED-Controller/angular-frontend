@@ -7,6 +7,7 @@ import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service
 import { LampDialogComponent } from './lamp-dialog/lamp-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { EditLampComponent } from './edit-lamp/edit-lamp.component';
 
 
 @Component({
@@ -70,6 +71,13 @@ unconfiguredLamps: string[] = [];
   }
   openDialog(lamp: Lamp) {
     const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp},);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openEditDialog(lamp: Lamp) {
+    const dialogRef = this.dialog.open(EditLampComponent, {data: lamp},);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Lamp } from '../interfaces/lamp';
 import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service';
+import { AddLampsDialogComponent } from './add-lamps-dialog/add-lamps-dialog.component';
 
 @Component({
   selector: 'led-add-lamps',
@@ -9,7 +11,8 @@ import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service
 })
 export class AddLampsComponent implements OnInit {
 
-  constructor(private unconfiguredLampsService: UnconfiguredLampsService) { }
+  constructor(private unconfiguredLampsService: UnconfiguredLampsService,
+              public dialog: MatDialog) { }
 
   unconfiguredLamps: string[] = [];
 
@@ -24,5 +27,11 @@ export class AddLampsComponent implements OnInit {
     this.getUnconfiguredLamps();
     console.log("refresh")
   }
+  openDialog(mac: string) {
+    const dialogRef = this.dialog.open(AddLampsDialogComponent, {data: mac},);
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

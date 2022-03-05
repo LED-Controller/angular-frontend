@@ -47,6 +47,24 @@ justify-items: center;
   width: 96vw;
   border-radius: 1rem;
 }
+.edit-card{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(30%, -30%);
+}
+.edit-card{
+  width: 30px;
+  height: 30px;
+  padding: 0rem;
+  background-color: rgb(51, 53, 56);
+}
+.edit-icon{
+  font-size: 18px;
+}
+:host ::ng-deep .mat-mini-fab .mat-button-wrapper{
+  padding: 0rem;
+}
 .card-head{
   display: flex;
   height: 6vh;

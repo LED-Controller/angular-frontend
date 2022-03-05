@@ -14,6 +14,9 @@
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
         <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.mac">
+          <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac" (click)="openEditDialog(lamp)">
+            <mat-icon class="edit-icon">edit</mat-icon>
+          </button>
           <div class="card-head">
             <div class="title">
               {{lamp.name}}

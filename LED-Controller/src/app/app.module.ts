@@ -24,6 +24,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 
 import { HttpClientModule} from '@angular/common/http';
+import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { HttpClientModule} from '@angular/common/http';
     SetupBridgeDialogComponent,
     LampDialogComponent,
     AddLampsDialogComponent,
+    EditLampComponent,
   ],
   imports: [
     BrowserModule,
