@@ -22,6 +22,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatSelectModule} from '@angular/material/select';
 
 import { HttpClientModule} from '@angular/common/http';
 import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
@@ -54,6 +55,7 @@ import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
     MatSlideToggleModule,
     MatExpansionModule,
     MatSliderModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

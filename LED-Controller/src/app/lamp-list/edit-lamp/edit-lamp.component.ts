@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { LightType } from './../../interfaces/lightType';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Lamp } from 'src/app/interfaces/lamp';
 
 @Component({
   selector: 'led-edit-lamp',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditLampComponent implements OnInit {
 
-  constructor() { }
+  floatLabelControl = new FormControl('auto');
+  panelColor = new FormControl('auto');
 
+  constructor(@Inject(MAT_DIALOG_DATA) public lamp: Lamp) { }
+  lightType= [LightType.RGB,LightType.RGBW,LightType.NEOPIXEL]
   ngOnInit(): void {
-  }
 
+  }
 }

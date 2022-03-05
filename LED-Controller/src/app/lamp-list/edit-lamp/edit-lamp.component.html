@@ -1,1 +1,28 @@
-<p>edit-lamp works!</p>
+<div class="body">
+  <div class="edit-container">
+    <h1 class="headline">Lampe bearbeiten</h1>
+    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value" >
+      <mat-label>Lampenname</mat-label>
+      <input matInput value={{lamp.name}}>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Lampenart</mat-label>
+      <mat-select [(ngModel)]="lamp.art">
+        <mat-option *ngFor="let type of this.lightType" value="{{type}}">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="submit-buttons">
+      <button mat-stroked-button color="primary" mat-dialog-close>Verwerfen</button>
+      <div id="spacer"></div>
+      <button mat-raised-button color="primary" [mat-dialog-close]="true">Übernehemen</button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="delete-container"></div>
+  <h1 class="headline">Lampe löschen</h1>
+  <div class="delete-button-container">
+    <button mat-fab color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
