@@ -4,7 +4,7 @@ import { Lamp } from "../interfaces/lamp";
 export const Lamps: Lamp[] = [
     { mac: "008041aefd7e",
       name: 'Wohnzimmer LED-Streifen',
-      art: LightType.RGB,
+      typ: LightType.RGB,
       isOn: true,
       isOnline: false,
       color: {r: 255,g:66,b:122,w:-1},
@@ -12,7 +12,7 @@ export const Lamps: Lamp[] = [
     },
     { mac: "119152bfge8f",
       name: 'Küchen LED-Streifen',
-      art: LightType.NEOPIXEL,
+      typ: LightType.NEOPIXEL,
       isOn: false,
       isOnline: true,
       color: {r: 44,g:166,b:255,w:-1},
