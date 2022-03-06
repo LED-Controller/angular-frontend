@@ -23,9 +23,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { HttpClientModule} from '@angular/common/http';
 import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
+import { ConnectToBridgeComponent } from './connect-to-bridge/connect-to-bridge.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,7 @@ import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
     LampDialogComponent,
     AddLampsDialogComponent,
     EditLampComponent,
+    ConnectToBridgeComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +60,8 @@ import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
     MatExpansionModule,
     MatSliderModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
