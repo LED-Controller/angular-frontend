@@ -48,18 +48,20 @@ export class LampDialogComponent implements OnInit {
     });
   }
   colorPickerRoutine = setInterval(() => {
-    let r=localStorage.getItem('rgb-color-r')
-    let g=localStorage.getItem('rgb-color-g')
-    let b=localStorage.getItem('rgb-color-b')
-    if(!( r === this.lamp.color.r+"")||!(g === this.lamp.color.g+"")||!(b === this.lamp.color.b+"")){
-      this.changeColor(r!,g!,b!)
+    let r=parseInt(JSON.parse(localStorage.getItem('rgb-color-r')!));
+    let g=parseInt(JSON.parse(localStorage.getItem('rgb-color-g')!));
+    let b=parseInt(JSON.parse(localStorage.getItem('rgb-color-b')!));
+    if(!isNaN(r)||!isNaN(g)||!isNaN(b)){
+      if(!( r === this.lamp.color.r)||!(g === this.lamp.color.g)||!(b === this.lamp.color.b)){
+        this.changeColor(r,g,b)
+      }
     }
   },500)
 
-  changeColor(r: string, g: string, b: string){
-    this.lamp.color.r = parseInt(JSON.parse(r));
-    this.lamp.color.g = parseInt(JSON.parse(g));
-    this.lamp.color.b = parseInt(JSON.parse(b));
+  changeColor(r: number, g: number, b: number){
+    this.lamp.color.r = r;
+    this.lamp.color.g = g;
+    this.lamp.color.b = b;
     //this.lampsService.updateLamp(this.lamp).subscribe();
     //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
@@ -86,6 +88,6 @@ export class LampDialogComponent implements OnInit {
     //this.getLamp();
   }
   onClose(){
-    clearInterval(this.colorPickerRoutine)
+    clearInterval(this.colorPickerRoutine);
   }
 }

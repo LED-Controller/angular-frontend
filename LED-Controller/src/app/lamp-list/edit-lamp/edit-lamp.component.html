@@ -1,5 +1,8 @@
 <div class="body">
   <div class="edit-container">
+    <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
     <h1 class="headline">Lampe bearbeiten</h1>
     <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value" >
       <mat-label>Lampenname</mat-label>
