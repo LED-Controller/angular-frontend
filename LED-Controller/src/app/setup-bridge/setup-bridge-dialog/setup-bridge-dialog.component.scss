@@ -38,7 +38,7 @@
 ::ng-deep .mat-input-element::placeholder{
   color: #0e73f6;
 }
-.container{
+.setup-container{
   padding-top: 1rem;
  }
 .buttons{
@@ -47,4 +47,7 @@
 }
 #space{
   width: 1rem;
+}
+#inputId:-webkit-autofill {
+  background-color: rgb(0, 0, 0) !important;
 }

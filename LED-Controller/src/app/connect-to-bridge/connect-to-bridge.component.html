@@ -1,0 +1,25 @@
+<div class="body">
+  <div *ngIf="this.status === 'init'">
+    <h1 >Wird geladen...</h1>
+    <div class="content">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <div *ngIf="this.status === 'success'">
+    <h1>Erfolgreich!</h1>
+    <div class="content">
+      <mat-icon class="connect" id="success">check_circle_outline</mat-icon>
+    </div>
+    <mat-progress-bar mode="determinate" value={{this.i}}></mat-progress-bar>
+  </div>
+  <div *ngIf="this.status === 'error'">
+    <h1>Fehlgeschlagen!</h1>
+    <div class="content">
+      <mat-icon class="connect" id="error">error_outline</mat-icon>
+    </div>
+    <mat-progress-bar mode="determinate" value={{this.i}}></mat-progress-bar>
+  </div>
+
+
+</div>
+

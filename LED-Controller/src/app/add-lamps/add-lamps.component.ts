@@ -28,7 +28,7 @@ export class AddLampsComponent implements OnInit {
     console.log("refresh")
   }
   openDialog(mac: string) {
-    const dialogRef = this.dialog.open(AddLampsDialogComponent, {data: mac},);
+    const dialogRef = this.dialog.open(AddLampsDialogComponent, {data: mac});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
