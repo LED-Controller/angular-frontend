@@ -1,1 +1,23 @@
-<p>add-lamps-dialog works!</p>
+<div class="body">
+  <div class="edit-container">
+    <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
+      <mat-icon class="close-icon">close</mat-icon>
+    </button>
+    <h1 class="headline">Lampe hinzufügen</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>Lampenname</mat-label>
+      <input matInput [(ngModel)]="lampName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Lampenart</mat-label>
+      <mat-select [(ngModel)]="lampTyp">
+        <mat-option *ngFor="let type of this.lightType" value="{{type}}">{{type}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="submit-buttons">
+      <button mat-stroked-button color="primary" mat-dialog-close>Abbrechen</button>
+      <div id="spacer"></div>
+      <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="createLamp()">Hinzufügen</button>
+    </div>
+  </div>
+</div>
