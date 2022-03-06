@@ -1,4 +1,7 @@
 <div class="body-lamp">
+  <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true" (click)="onClose()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
   <div class="lamp-name">
     <h1>{{lamp.name}}</h1>
   </div>
