@@ -1,3 +1,4 @@
+import { LoginService } from './../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { SetupBridgeDialogComponent } from './setup-bridge-dialog/setup-bridge-dialog.component';
@@ -9,12 +10,13 @@ import { SetupBridgeDialogComponent } from './setup-bridge-dialog/setup-bridge-d
 })
 export class SetupBridgeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,) { }
 
   ngOnInit(): void {
+
   }
   openDialog() {
-    const dialogRef = this.dialog.open(SetupBridgeDialogComponent, {panelClass: 'setup-dialog'});
+    const dialogRef = this.dialog.open(SetupBridgeDialogComponent, );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

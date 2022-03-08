@@ -9,8 +9,11 @@ import { Lamps } from '../mocks/lamps-mock';
 })
 export class LampsService {
 
-  private randomUrl = 'api/heroes';
   constructor(private httpClient: HttpClient) { }
+
+  private getToken():string{
+    return localStorage.getItem('id_token')!;
+  }
 
   getLamps(): Lamp[] {
     return Lamps;
@@ -29,7 +32,9 @@ export class LampsService {
   deleteLamp(lamp: Lamp): Observable<void> {
     return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
   }
-  randomize(lamp: Lamp): Observable<Lamp> {
-    return this.httpClient.post<Lamp>(`http://localhost:8080/random/${lamp.mac}`,lamp);
+  randomize(lamp: Lamp): Observable<any> {
+    let token: string = this.getToken();
+    const headers = {'Authorization': token};
+    return this.httpClient.post<any>(`http://localhost:8080/random`,lamp.mac, {headers});
   }
 }
