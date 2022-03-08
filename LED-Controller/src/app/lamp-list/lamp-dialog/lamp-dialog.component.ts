@@ -84,7 +84,10 @@ export class LampDialogComponent implements OnInit {
     return value;
   }
   randomMode():void{
-    this.lampsService.randomize(this.lamp).subscribe(lamp => this.lamp = lamp);
+    this.lampsService.randomize(this.lamp).subscribe(lamp => {
+      this.lamp = lamp;
+      console.log(lamp);
+    })
     //this.getLamp();
   }
   onClose(){

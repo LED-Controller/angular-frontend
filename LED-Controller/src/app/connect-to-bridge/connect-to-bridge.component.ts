@@ -20,17 +20,34 @@ export class ConnectToBridgeComponent implements OnInit {
 
   status = "init"
   ngOnInit(): void {
-    this.loginService.getLoginData().subscribe({
-      next: data => {
-        console.log(data)
-        this.status="success"
-        this.weiterleitungRoutine("success");
-      },
-      error: error => {
-        console.log(error.status);
-        this.status="error";
-        this.weiterleitungRoutine("error");
-    }});
+    if(this.login.passwordIsSet){
+      this.loginService.authenticate({password: this.login.password}).subscribe({
+        next: data => {
+          console.log(data)
+          localStorage.setItem('id_token', data.token)
+          this.status="success"
+          this.weiterleitungRoutine("success");
+        },
+        error: error => {
+          console.log(error.status);
+          this.status="error";
+          this.weiterleitungRoutine("error");
+      }});
+    }
+    if(!this.login.passwordIsSet){
+      this.loginService.setPassword({password: this.login.password}).subscribe({
+        next: data => {
+          console.log(data)
+          localStorage.setItem('id_token', data.token)
+          this.status="success"
+          this.weiterleitungRoutine("success");
+        },
+        error: error => {
+          console.log(error.status);
+          this.status="error";
+          this.weiterleitungRoutine("error");
+      }});
+    }
   }
 
   weiterleitungRoutine(staus: any){

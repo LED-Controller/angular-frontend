@@ -1,4 +1,4 @@
-import { Login } from './../../interfaces/login';
+import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,10 +17,12 @@ export class SetupBridgeDialogComponent implements OnInit {
   login={
     ipAdress: "",
     password: "",
+    passwordIsSet: false,
   }
 
   constructor(fb: FormBuilder,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private loginService: LoginService,) {
     this.options = fb.group({
       hideRequired: this.hideRequiredControl,
       floatLabel: this.floatLabelControl,
@@ -28,8 +30,17 @@ export class SetupBridgeDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginService.getPasswordStatus().subscribe({
+      next: data => {
+        console.log(data.passwordIsAlreadySet);
+        this.login.passwordIsSet=data.passwordIsAlreadySet;
+        console.log(this.login.passwordIsSet);
+      },
+      error: error => {
+        console.log(error.status);
+    }});
   }
-  openDialog() {
+  connectToBridge() {
     const dialogRef = this.dialog.open(ConnectToBridgeComponent, {data: this.login});
   }
 }

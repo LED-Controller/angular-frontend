@@ -1,4 +1,4 @@
-import { Login } from './../interfaces/login';
+import { PasswordIsAlreadySet, Password } from './../interfaces/login';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,10 +10,15 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getLoginData(): Observable<Login>{
-    return this.httpClient.get<Login>(`http://localhost:8080/login`)
+  getPasswordStatus(): Observable<PasswordIsAlreadySet>{
+    return this.httpClient.get<PasswordIsAlreadySet>(`http://localhost:8080/login/passwordstatus`)
   }
-  setPassword(pass: string): Observable<string>{
-    return this.httpClient.post<string>(`http://localhost:8080/password`,pass);
+
+  setPassword(pass: Password): Observable<any>{
+    return this.httpClient.post<any>(`http://localhost:8080/login/password`,pass);
+  }
+
+  authenticate(pass: Password): Observable<any>{
+    return this.httpClient.post<any>(`http://localhost:8080/login`,pass)
   }
 }

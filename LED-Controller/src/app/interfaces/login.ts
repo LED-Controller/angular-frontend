@@ -1,4 +1,6 @@
-export interface Login {
-  password: string,
-  token: string,
+export interface PasswordIsAlreadySet {
+  passwordIsAlreadySet: boolean,
+};
+export interface Password {
+
 }
