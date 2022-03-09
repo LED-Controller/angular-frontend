@@ -25,7 +25,6 @@ export class ConnectToBridgeComponent implements OnInit {
     if(this.login.passwordIsSet){
       this.loginService.authenticate({password: this.login.password}).subscribe({
         next: data => {
-          console.log(data)
           this.tokenStorageService.saveToken(data.token);
           this.tokenStorageService.saveUser(data.user);
           this.status="success"
@@ -40,7 +39,6 @@ export class ConnectToBridgeComponent implements OnInit {
     if(!this.login.passwordIsSet){
       this.loginService.setPassword({password: this.login.password}).subscribe({
         next: data => {
-          console.log(data)
           this.tokenStorageService.saveToken(data.token);
           this.tokenStorageService.saveUser(data.user);
           this.status="success"
@@ -57,14 +55,13 @@ export class ConnectToBridgeComponent implements OnInit {
   weiterleitungRoutine(staus: any){
     this.i = 0;
     let routine = setInterval(() => {
-      console.log("drin")
       this.i=this.i+20
       if(this.i===100){
-        if(staus === "success")
-        {
+        if(staus === "success"){
           this.router.navigate(['setup/finished'])
           this.dialog.closeAll()
-        }else
+        }
+        if(staus === "error")
         {
           this.dialog.closeAll()
           const dialogRef = this.dialog.open(SetupBridgeDialogComponent);

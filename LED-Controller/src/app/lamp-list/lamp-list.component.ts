@@ -33,26 +33,22 @@ unconfiguredLamps: string[] = [];
   ngOnInit(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
-    this.countUnconfiguredLamps();
     this.index="";
     this.selectedItem = null;
   }
   //call services
   getLamps(): void {
     this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps.lamps);
-    //this.lamps = this.lampsService.getLamps();
   }
   refresh(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
-    this.countUnconfiguredLamps();
     console.log("refresh")
   }
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
-      next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps},
+      next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps; this.countUnconfiguredLamps(lamps);},
       error: error => {console.log(error);}});
-    //this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
     //lamp.isOn = this.toolCaseService.changeIsOnState(event)
@@ -69,9 +65,9 @@ unconfiguredLamps: string[] = [];
     //this.getLamps()
   }
   //define own services
-  countUnconfiguredLamps(): void {
+  countUnconfiguredLamps(lamps: any): void {
     this.countUnconLamps = 0;
-    this.unconfiguredLamps.forEach(element => {
+    lamps.forEach(() => {
       this.countUnconLamps++;
     });
   }

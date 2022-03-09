@@ -19,7 +19,7 @@ export class LampsService {
     return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
   }
   updateLamp(lamp: Lamp): Observable<Lamp> {
-    return this.httpClient.post<Lamp>(`http://localhost:8080/update/${lamp.mac}`,lamp);
+    return this.httpClient.post<Lamp>(`http://localhost:8080/update/`,lamp);
   }
   deleteLamp(lamp: Lamp): Observable<void> {
     return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);

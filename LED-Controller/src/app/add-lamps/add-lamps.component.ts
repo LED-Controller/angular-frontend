@@ -21,7 +21,6 @@ export class AddLampsComponent implements OnInit {
         next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps},
         error: error => {console.log(error);}
       })
-    //this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
   }
 
   ngOnInit(): void {
@@ -36,7 +35,7 @@ export class AddLampsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      this.refresh();
+      if(result){this.unconfiguredLamps = this.unconfiguredLamps.filter(item => item !== mac);}
     });
   }
 }

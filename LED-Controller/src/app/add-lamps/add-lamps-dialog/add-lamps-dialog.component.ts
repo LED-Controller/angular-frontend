@@ -38,4 +38,5 @@ export class AddLampsDialogComponent implements OnInit {
       next: data => {console.log(data)},
       error: error => {console.log(error);}});
   }
+
 }
