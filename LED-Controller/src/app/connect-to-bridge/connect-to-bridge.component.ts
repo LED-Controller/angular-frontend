@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SetupBridgeDialogComponent } from '../setup-bridge/setup-bridge-dialog/setup-bridge-dialog.component';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'led-connect-to-bridge',
@@ -16,7 +17,8 @@ export class ConnectToBridgeComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public login: any,
   private loginService: LoginService,
   public dialog: MatDialog,
-  private router: Router) { }
+  private router: Router,
+  private tokenStorageService: TokenStorageService,) { }
 
   status = "init"
   ngOnInit(): void {
@@ -24,12 +26,13 @@ export class ConnectToBridgeComponent implements OnInit {
       this.loginService.authenticate({password: this.login.password}).subscribe({
         next: data => {
           console.log(data)
-          localStorage.setItem('id_token', data.token)
+          this.tokenStorageService.saveToken(data.token);
+          this.tokenStorageService.saveUser(data.user);
           this.status="success"
           this.weiterleitungRoutine("success");
         },
         error: error => {
-          console.log(error.status);
+          console.log(error);
           this.status="error";
           this.weiterleitungRoutine("error");
       }});
@@ -38,12 +41,13 @@ export class ConnectToBridgeComponent implements OnInit {
       this.loginService.setPassword({password: this.login.password}).subscribe({
         next: data => {
           console.log(data)
-          localStorage.setItem('id_token', data.token)
+          this.tokenStorageService.saveToken(data.token);
+          this.tokenStorageService.saveUser(data.user);
           this.status="success"
           this.weiterleitungRoutine("success");
         },
         error: error => {
-          console.log(error.status);
+          console.log(error);
           this.status="error";
           this.weiterleitungRoutine("error");
       }});

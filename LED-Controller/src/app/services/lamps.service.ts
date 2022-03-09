@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './auth.interceptor';
 import { Lamp } from './../interfaces/lamp';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -11,18 +12,9 @@ export class LampsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private getToken():string{
-    return localStorage.getItem('id_token')!;
+  getLamps(): Observable<any> {
+    return this.httpClient.get<any>(`http://localhost:8080/lamps`);
   }
-
-  getLamps(): Lamp[] {
-    return Lamps;
-  }
-  /*
-  getLamps(): Observable<Lamp[]> {
-    return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`);
-  }
-  */
   getLamp(lamp: Lamp): Observable<Lamp>{
     return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
   }
@@ -33,8 +25,6 @@ export class LampsService {
     return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
   }
   randomize(lamp: Lamp): Observable<any> {
-    let token: string = this.getToken();
-    const headers = {'Authorization': token};
-    return this.httpClient.post<any>(`http://localhost:8080/random`,lamp.mac, {headers});
+    return this.httpClient.post<any>(`http://localhost:8080/random`,{"mac": lamp.mac});
   }
 }

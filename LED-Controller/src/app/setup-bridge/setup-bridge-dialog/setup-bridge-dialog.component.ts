@@ -37,7 +37,7 @@ export class SetupBridgeDialogComponent implements OnInit {
         console.log(this.login.passwordIsSet);
       },
       error: error => {
-        console.log(error.status);
+        console.log(error);
     }});
   }
   connectToBridge() {

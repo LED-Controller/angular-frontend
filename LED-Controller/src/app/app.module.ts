@@ -26,9 +26,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
 import { ConnectToBridgeComponent } from './connect-to-bridge/connect-to-bridge.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,11 @@ import { ConnectToBridgeComponent } from './connect-to-bridge/connect-to-bridge.
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

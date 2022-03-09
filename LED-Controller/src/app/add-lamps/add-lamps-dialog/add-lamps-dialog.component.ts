@@ -23,7 +23,7 @@ export class AddLampsDialogComponent implements OnInit {
     let lamp: Lamp = {
       mac: this.macAdress,
       name: this.lampName,
-      typ: this.lampTyp,
+      type: this.lampTyp,
       isOn: true,
       isOnline: true,
       color: {
@@ -34,7 +34,8 @@ export class AddLampsDialogComponent implements OnInit {
       },
       brightness: 100,
     }
-    this.unconfiguredLampsService.setNewLamp(lamp).subscribe();
-    console.log(lamp)
+    this.unconfiguredLampsService.setNewLamp(lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
   }
 }

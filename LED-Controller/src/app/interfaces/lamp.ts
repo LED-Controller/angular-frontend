@@ -3,7 +3,7 @@ import { LightType } from './lightType';
 export interface Lamp {
   mac: string,
   name: string,
-  typ: LightType,
+  type: LightType,
   isOn: boolean,
   isOnline: boolean,
   color: Color,

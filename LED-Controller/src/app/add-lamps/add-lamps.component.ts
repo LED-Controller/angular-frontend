@@ -17,7 +17,11 @@ export class AddLampsComponent implements OnInit {
   unconfiguredLamps: string[] = [];
 
   getUnconfiguredLamps(): void {
-    this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
+    this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
+        next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps},
+        error: error => {console.log(error);}
+      })
+    //this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
   }
 
   ngOnInit(): void {

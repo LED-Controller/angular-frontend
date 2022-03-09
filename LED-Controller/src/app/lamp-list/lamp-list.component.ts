@@ -8,6 +8,7 @@ import { LampDialogComponent } from './lamp-dialog/lamp-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { EditLampComponent } from './edit-lamp/edit-lamp.component';
+import { AuthGuard } from '../services/authguard.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ unconfiguredLamps: string[] = [];
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
               private toolCaseService: ToolCaseService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private authGuard: AuthGuard) { }
   ngOnInit(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
@@ -37,8 +39,8 @@ unconfiguredLamps: string[] = [];
   }
   //call services
   getLamps(): void {
-    //this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps);
-    this.lamps = this.lampsService.getLamps();
+    this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps.lamps);
+    //this.lamps = this.lampsService.getLamps();
   }
   refresh(): void {
     this.getLamps();
@@ -47,16 +49,23 @@ unconfiguredLamps: string[] = [];
     console.log("refresh")
   }
   getUnconfiguredLamps(): void {
-    this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
+    this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
+      next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps},
+      error: error => {console.log(error);}});
+    //this.unconfiguredLamps = this.unconfiguredLampsService.getUnconfiguredLamps();
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
-    lamp.isOn = this.toolCaseService.changeIsOnState(event)
-    //this.lampsService.updateLamp(lamp).subscribe();
+    //lamp.isOn = this.toolCaseService.changeIsOnState(event)
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     //this.getLamps()
   }
   changeBrightness(event: any, lamp: Lamp) {
-    lamp.brightness = this.toolCaseService.changeBrightness(event)
-    //this.lampsService.updateLamp(lamp).subscribe();
+    //lamp.brightness = this.toolCaseService.changeBrightness(event)
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     //this.getLamps()
   }
   //define own services

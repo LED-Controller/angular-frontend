@@ -11,14 +11,9 @@ export class UnconfiguredLampsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getUnconfiguredLamps(): string[]{
-    return MacAdresses;
-  }
-/*
   getUnconfiguredLamps(): Observable<string[]>{
     return this.httpClient.get<string[]>(`http://localhost:8080/unknown`);
   }
-  */
   setNewLamp(lamp: Lamp):Observable<Lamp>{
     return this.httpClient.post<Lamp>(`http://localhost:8080/register`,lamp);
   }

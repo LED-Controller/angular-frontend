@@ -27,7 +27,9 @@ export class LampDialogComponent implements OnInit {
     this.colorPickerRoutine;
   }
   getLamp(): void {
-    this.lampsService.getLamp(this.lamp).subscribe(lamp => this.lamp = lamp)
+    this.lampsService.getLamp(this.lamp).subscribe({
+      next: lamp => {console.log(lamp);this.lamp = lamp},
+      error: error => {console.log(error);}})
   }
   buildColorPicker(){
     this.colorPicker = iro.ColorPicker('#color-picker',{
@@ -62,19 +64,25 @@ export class LampDialogComponent implements OnInit {
     this.lamp.color.r = r;
     this.lamp.color.g = g;
     this.lamp.color.b = b;
-    //this.lampsService.updateLamp(this.lamp).subscribe();
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
 
   }
   changeIsOnState(event: MatSlideToggleChange):any{
     this.lamp.isOn = this.toolCaseService.changeIsOnState(event)
-    //this.lampsService.updateLamp(this.lamp).subscribe();
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     //this.getLamp();
   }
   changeBrightness(event: any) {
     this.lamp.brightness = this.toolCaseService.changeBrightness(event)
-    //this.lampsService.updateLamp(this.lamp).subscribe();
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     //this.getLamp();
   }
   formatLabel(value: number) {
@@ -84,10 +92,15 @@ export class LampDialogComponent implements OnInit {
     return value;
   }
   randomMode():void{
-    this.lampsService.randomize(this.lamp).subscribe(lamp => {
-      this.lamp = lamp;
-      console.log(lamp);
-    })
+    this.lampsService.randomize(this.lamp).subscribe(
+      {
+        next: lamp => {
+          this.lamp = lamp;
+          console.log(lamp);
+        },
+        error: error => {
+          console.log(error);
+        }})
     //this.getLamp();
   }
   onClose(){

@@ -15,7 +15,7 @@ export class EditLampComponent implements OnInit {
   floatLabelControl = new FormControl('auto');
   panelColor = new FormControl('auto');
   lampName = this.lamp.name;
-  lampTyp = this.lamp.typ;
+  lampTyp = this.lamp.type;
 
   constructor(@Inject(MAT_DIALOG_DATA) public lamp: Lamp,
   private lampsService: LampsService) { }
@@ -24,15 +24,22 @@ export class EditLampComponent implements OnInit {
 
   }
   getLamp(): void {
-    this.lampsService.getLamp(this.lamp).subscribe(lamp => this.lamp = lamp)
+    this.lampsService.getLamp(this.lamp).subscribe({
+      next: lamp => {console.log(lamp);this.lamp = lamp},
+      error: error => {console.log(error);}})
   }
   editLamp(){
     this.lamp.name = this.lampName;
-    this.lamp.typ = this.lampTyp;
-    this.lampsService.updateLamp(this.lamp).subscribe();
+    this.lamp.type = this.lampTyp;
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);}});
     this.getLamp();
   }
   deleteLamp(){
-    this.lampsService.deleteLamp(this.lamp).subscribe();
+    this.lampsService.deleteLamp(this.lamp).subscribe({
+        next: data => {console.log(data)},
+        error: error => {console.log(error);}}
+    );
   }
 }
