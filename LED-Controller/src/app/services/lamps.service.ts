@@ -10,8 +10,8 @@ export class LampsService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getLamps(): Observable<any> {
-    return this.httpClient.get<any>(`http://localhost:8080/lamps`);
+  getLamps(): Observable<Lamp[]> {
+    return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`);
   }
   getLamp(lamp: Lamp): Observable<Lamp>{
     return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
@@ -23,6 +23,6 @@ export class LampsService {
     return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
   }
   randomize(lamp: Lamp): Observable<any> {
-    return this.httpClient.post<any>(`http://localhost:8080/random`,{"mac": lamp.mac});
+    return this.httpClient.post<any>(`http://localhost:8080/random`,lamp.mac);
   }
 }

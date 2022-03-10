@@ -1,4 +1,4 @@
-import { Lamp } from './../../interfaces/lamp';
+import { Lamp } from 'src/app/interfaces/lamp';
 import iro from '@jaames/iro';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -60,7 +60,7 @@ export class LampDialogComponent implements OnInit {
         this.changeColor(r,g,b)
       }
     }
-  },500)
+  },100)
 
   changeColor(r: number, g: number, b: number){
     this.lamp.color.r = r;
@@ -97,7 +97,11 @@ export class LampDialogComponent implements OnInit {
     this.lampsService.randomize(this.lamp).subscribe(
       {
         next: lamp => {
+          localStorage.setItem('rgb-color-r', lamp.color.r);
+          localStorage.setItem('rgb-color-g', lamp.color.g);
+          localStorage.setItem('rgb-color-b', lamp.color.b);
           this.lamp = lamp;
+          this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
           console.log(lamp);
         },
         error: error => {
