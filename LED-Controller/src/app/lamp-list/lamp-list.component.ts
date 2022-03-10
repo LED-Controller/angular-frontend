@@ -38,7 +38,7 @@ unconfiguredLamps: string[] = [];
   }
   //call services
   getLamps(): void {
-    this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps.lamps);
+    this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps);
   }
   refresh(): void {
     this.getLamps();
@@ -51,14 +51,14 @@ unconfiguredLamps: string[] = [];
       error: error => {console.log(error);}});
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
-    //lamp.isOn = this.toolCaseService.changeIsOnState(event)
+    lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {console.log(data)},
       error: error => {console.log(error);}});
     //this.getLamps()
   }
   changeBrightness(event: any, lamp: Lamp) {
-    //lamp.brightness = this.toolCaseService.changeBrightness(event)
+    lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {console.log(data)},
       error: error => {console.log(error);}});
@@ -86,6 +86,8 @@ unconfiguredLamps: string[] = [];
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result===false){this.lamps = this.lamps.filter(item => item.mac !== lamp.mac);}
+      this.getUnconfiguredLamps();
     });
   }
   @HostListener('document:click', ['$event'])

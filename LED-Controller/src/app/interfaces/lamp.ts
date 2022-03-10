@@ -4,8 +4,8 @@ export interface Lamp {
   mac: string,
   name: string,
   type: LightType,
-  isOn: boolean,
-  isOnline: boolean,
+  on: boolean,
+  online: boolean,
   color: Color,
   brightness: number,
 }

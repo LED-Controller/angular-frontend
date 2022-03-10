@@ -23,6 +23,7 @@ export class LampDialogComponent implements OnInit {
 
   colorPicker: any;
   ngOnInit(): void {
+    console.log(this.lamp)
     this.buildColorPicker();
     this.colorPickerRoutine;
   }
@@ -40,6 +41,7 @@ export class LampDialogComponent implements OnInit {
         },
       ],
       width: 270,
+      //color: `rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`,
       color: `rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`,
       wheelLightness: false,
     })
@@ -72,7 +74,7 @@ export class LampDialogComponent implements OnInit {
 
   }
   changeIsOnState(event: MatSlideToggleChange):any{
-    this.lamp.isOn = this.toolCaseService.changeIsOnState(event)
+    this.lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(this.lamp).subscribe({
       next: data => {console.log(data)},
       error: error => {console.log(error);}});

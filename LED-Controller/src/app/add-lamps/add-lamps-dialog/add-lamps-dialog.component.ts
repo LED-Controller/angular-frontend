@@ -24,8 +24,8 @@ export class AddLampsDialogComponent implements OnInit {
       mac: this.macAdress,
       name: this.lampName,
       type: this.lampTyp,
-      isOn: true,
-      isOnline: true,
+      on: true,
+      online: true,
       color: {
         r:255,
         g:255,

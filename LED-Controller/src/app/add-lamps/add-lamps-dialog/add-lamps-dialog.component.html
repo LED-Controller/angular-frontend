@@ -1,12 +1,12 @@
 <div class="body">
   <div class="edit-container">
-    <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
+    <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="false">
       <mat-icon class="close-icon">close</mat-icon>
     </button>
     <h1 class="headline">Lampe hinzufügen</h1>
     <mat-form-field appearance="fill">
       <mat-label>Lampenname</mat-label>
-      <input matInput [(ngModel)]="lampName">
+      <input matInput id="inputId" [(ngModel)]="lampName" autocomplete="off">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Lampenart</mat-label>

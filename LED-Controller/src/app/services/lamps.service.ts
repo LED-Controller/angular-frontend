@@ -1,9 +1,7 @@
-import { AuthInterceptor } from './auth.interceptor';
 import { Lamp } from './../interfaces/lamp';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Lamps } from '../mocks/lamps-mock';
 
 @Injectable({
   providedIn: 'root'
