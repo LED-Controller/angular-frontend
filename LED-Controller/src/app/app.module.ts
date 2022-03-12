@@ -30,6 +30,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { EditLampComponent } from './lamp-list/edit-lamp/edit-lamp.component';
 import { ConnectToBridgeComponent } from './connect-to-bridge/connect-to-bridge.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { SetupBridgeIpComponent } from './setup-bridge/setup-bridge-ip/setup-bridge-ip.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AddLampsDialogComponent,
     EditLampComponent,
     ConnectToBridgeComponent,
+    SetupBridgeIpComponent,
   ],
   imports: [
     BrowserModule,

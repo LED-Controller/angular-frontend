@@ -1,9 +1,10 @@
 import { LoginService } from './../../services/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConnectToBridgeComponent } from 'src/app/connect-to-bridge/connect-to-bridge.component';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
+import { SetupBridgeIpComponent } from '../setup-bridge-ip/setup-bridge-ip.component';
 
 @Component({
   selector: 'led-setup-bridge-dialog',
@@ -16,14 +17,18 @@ export class SetupBridgeDialogComponent implements OnInit {
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
   login={
-    ipAdress: this.tokenStorageService.getIp(),
+    ipAdress: this.ipAdress,
     password: "",
+    pwStatus: false,
   }
-  ipset=false;
+  status = "init"
+  i = 0;
+
   constructor(fb: FormBuilder,
     public dialog: MatDialog,
-    private loginService: LoginService,
-    private tokenStorageService: TokenStorageService,) {
+    @Inject(MAT_DIALOG_DATA) public ipAdress: any,
+    private tokenStorageService: TokenStorageService,
+    private loginService: LoginService) {
     this.options = fb.group({
       hideRequired: this.hideRequiredControl,
       floatLabel: this.floatLabelControl,
@@ -31,7 +36,24 @@ export class SetupBridgeDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.tokenStorageService.getIp()!==''){this.ipset=true}
+    this.loginService.getPasswordStatus().subscribe({
+      next: data => {this.login.pwStatus = data.passwordIsAlreadySet;
+        this.status="loaded";
+        this.tokenStorageService.saveIp(this.login.ipAdress)},
+      error: error => {console.log(error);
+      this.status="error";
+      this.i = 0;
+      let routine = setInterval(() => {
+        this.i=this.i+20
+        if(this.i===100){
+          this.dialog.closeAll()
+          const dialogRef = this.dialog.open(SetupBridgeIpComponent);
+          clearTimeout(routine)
+        }
+      },500)
+
+    },
+    })
   }
   connectToBridge() {
     const dialogRef = this.dialog.open(ConnectToBridgeComponent, {data: this.login});

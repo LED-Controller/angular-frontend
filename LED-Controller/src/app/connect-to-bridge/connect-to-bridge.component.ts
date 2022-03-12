@@ -32,7 +32,6 @@ export class ConnectToBridgeComponent implements OnInit {
             next: data => {
               this.tokenStorageService.saveToken(data.token);
               this.tokenStorageService.saveUser(data.user);
-              this.tokenStorageService.saveIp(this.login.ipAdress);
               this.status="success"
               this.weiterleitungRoutine("success");
             },
@@ -47,7 +46,6 @@ export class ConnectToBridgeComponent implements OnInit {
             next: data => {
               this.tokenStorageService.saveToken(data.token);
               this.tokenStorageService.saveUser(data.user);
-              this.tokenStorageService.saveIp(this.login.ipAdress)
               this.status="success"
               this.weiterleitungRoutine("success");
             },
@@ -74,7 +72,7 @@ export class ConnectToBridgeComponent implements OnInit {
         if(staus === "error")
         {
           this.dialog.closeAll()
-          const dialogRef = this.dialog.open(SetupBridgeDialogComponent);
+          const dialogRef = this.dialog.open(SetupBridgeDialogComponent, {data: this.login.ipAdress});
         }
         clearTimeout(routine)
       }

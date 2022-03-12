@@ -4,9 +4,7 @@
 ::ng-deep .mat-dialog-container {
   background: #111010;
   color: rgb(243, 246, 250);
-}
-h1{
-  text-align: center;
+  width: 80vw;
 }
 .close-button{
   float: right;
@@ -52,19 +50,6 @@ h1{
 #inputId:-webkit-autofill {
   background-color: rgb(0, 0, 0) !important;
 }
-.content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 20vh;
-  width: 70vw;
-  font-size: 7rem;
-}
-.connect{
-  font-size: 7rem;
-  height: auto;
-  width: auto;
-}
-#error{
-  color: red;
+h1{
+  text-align: center;
 }
