@@ -28,8 +28,7 @@ unconfiguredLamps: string[] = [];
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
               private toolCaseService: ToolCaseService,
-              public dialog: MatDialog,
-              private authGuard: AuthGuard) { }
+              public dialog: MatDialog,) { }
   ngOnInit(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
@@ -38,8 +37,12 @@ unconfiguredLamps: string[] = [];
   }
   //call services
   getLamps(): void {
-    this.lampsService.getLamps().subscribe(lamps => this.lamps = lamps);
+    this.lampsService.getLamps().subscribe({
+      next: lamps => {this.lamps = lamps;},
+      error: error =>{console.log(error);
+        this.toolCaseService.isActive(error);}});
   }
+
   refresh(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
@@ -48,20 +51,23 @@ unconfiguredLamps: string[] = [];
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
       next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps; this.countUnconfiguredLamps(lamps);},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
     lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     //this.getLamps()
   }
   changeBrightness(event: any, lamp: Lamp) {
     lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     //this.getLamps()
   }
   //define own services

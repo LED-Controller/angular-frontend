@@ -20,36 +20,46 @@ export class ConnectToBridgeComponent implements OnInit {
   private router: Router,
   private tokenStorageService: TokenStorageService,) { }
 
+  passwordIsSet=false;
   status = "init"
   ngOnInit(): void {
-    if(this.login.passwordIsSet){
-      this.loginService.authenticate({password: this.login.password}).subscribe({
-        next: data => {
-          this.tokenStorageService.saveToken(data.token);
-          this.tokenStorageService.saveUser(data.user);
-          this.status="success"
-          this.weiterleitungRoutine("success");
-        },
-        error: error => {
-          console.log(error);
-          this.status="error";
-          this.weiterleitungRoutine("error");
-      }});
-    }
-    if(!this.login.passwordIsSet){
-      this.loginService.setPassword({password: this.login.password}).subscribe({
-        next: data => {
-          this.tokenStorageService.saveToken(data.token);
-          this.tokenStorageService.saveUser(data.user);
-          this.status="success"
-          this.weiterleitungRoutine("success");
-        },
-        error: error => {
-          console.log(error);
-          this.status="error";
-          this.weiterleitungRoutine("error");
-      }});
-    }
+
+    this.loginService.getPasswordStatus().subscribe({
+      next: data =>{
+        this.passwordIsSet = data.passwordIsAlreadySet
+        if(this.passwordIsSet){
+          this.loginService.authenticate({password: this.login.password}).subscribe({
+            next: data => {
+              this.tokenStorageService.saveToken(data.token);
+              this.tokenStorageService.saveUser(data.user);
+              this.tokenStorageService.saveIp(this.login.ipAdress);
+              this.status="success"
+              this.weiterleitungRoutine("success");
+            },
+            error: error => {
+              console.log(error);
+              this.status="error";
+              this.weiterleitungRoutine("error");
+          }});
+        }
+        if(!this.passwordIsSet){
+          this.loginService.setPassword({password: this.login.password}).subscribe({
+            next: data => {
+              this.tokenStorageService.saveToken(data.token);
+              this.tokenStorageService.saveUser(data.user);
+              this.tokenStorageService.saveIp(this.login.ipAdress)
+              this.status="success"
+              this.weiterleitungRoutine("success");
+            },
+            error: error => {
+              console.log(error);
+              this.status="error";
+              this.weiterleitungRoutine("error");
+          }});
+        }
+      },
+      error: error =>{console.log(error);
+        this.weiterleitungRoutine("error")}})
   }
 
   weiterleitungRoutine(staus: any){

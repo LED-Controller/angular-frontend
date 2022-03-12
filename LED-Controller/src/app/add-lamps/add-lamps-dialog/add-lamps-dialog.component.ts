@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lamp } from 'src/app/interfaces/lamp';
 import { UnconfiguredLampsService } from 'src/app/services/unconfigured-lamps.service';
+import { ToolCaseService } from 'src/app/services/tool-case.service';
 
 @Component({
   selector: 'led-add-lamps-dialog',
@@ -12,7 +13,8 @@ import { UnconfiguredLampsService } from 'src/app/services/unconfigured-lamps.se
 export class AddLampsDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public macAdress: string,
-  private unconfiguredLampsService: UnconfiguredLampsService) { }
+  private unconfiguredLampsService: UnconfiguredLampsService,
+  private toolCaseService: ToolCaseService,) { }
   lampName="";
   lampTyp= LightType.RGB;
   lightType= [LightType.RGB,LightType.RGBW,LightType.NEOPIXEL]
@@ -36,7 +38,14 @@ export class AddLampsDialogComponent implements OnInit {
     }
     this.unconfiguredLampsService.setNewLamp(lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
   }
-
+  identifyLamp(){
+    this.unconfiguredLampsService.indentifyLamp(this.macAdress).subscribe({
+      next: data => {console.log(data)},
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}
+    })
+}
 }

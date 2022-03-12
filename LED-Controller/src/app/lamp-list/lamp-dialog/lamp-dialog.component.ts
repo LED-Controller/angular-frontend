@@ -30,7 +30,8 @@ export class LampDialogComponent implements OnInit {
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
       next: lamp => {console.log(lamp);this.lamp = lamp},
-      error: error => {console.log(error);}})
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}})
   }
   buildColorPicker(){
     this.colorPicker = iro.ColorPicker('#color-picker',{
@@ -68,7 +69,8 @@ export class LampDialogComponent implements OnInit {
     this.lamp.color.b = b;
     this.lampsService.updateLamp(this.lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
 
@@ -77,14 +79,16 @@ export class LampDialogComponent implements OnInit {
     this.lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(this.lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     //this.getLamp();
   }
   changeBrightness(event: any) {
     this.lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(this.lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     //this.getLamp();
   }
   formatLabel(value: number) {
@@ -106,6 +110,7 @@ export class LampDialogComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.toolCaseService.isActive(error);
         }})
     //this.getLamp();
   }

@@ -4,16 +4,26 @@
       <mat-icon class="close-icon">close</mat-icon>
     </button>
     <h1 class="headline">Lampe hinzufügen</h1>
-    <mat-form-field appearance="fill">
-      <mat-label>Lampenname</mat-label>
-      <input matInput id="inputId" [(ngModel)]="lampName" autocomplete="off">
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Lampenart</mat-label>
-      <mat-select [(ngModel)]="lampTyp">
-        <mat-option *ngFor="let type of this.lightType" value="{{type}}">{{type}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="input-content">
+      <div class="inputfields">
+        <mat-form-field appearance="fill">
+          <mat-label>Lampenname</mat-label>
+          <input matInput id="inputId" [(ngModel)]="lampName" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Lampenart</mat-label>
+          <mat-select [(ngModel)]="lampTyp">
+            <mat-option *ngFor="let type of this.lightType" value="{{type}}">{{type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="ping-button-container">
+        <button mat-mini-fab color="primary" class="ping-button" (click)="identifyLamp()">
+          <mat-icon> highlight</mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
     <div class="submit-buttons">
       <button mat-stroked-button color="primary" mat-dialog-close>Abbrechen</button>
       <div id="spacer"></div>

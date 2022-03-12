@@ -2,8 +2,8 @@
   <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
     <mat-icon class="close-icon">close</mat-icon>
   </button>
-  <h1 *ngIf="login.passwordIsSet">Mit Bridge verbinden</h1>
-  <h1 *ngIf="!login.passwordIsSet">Bridge einrichten</h1>
+  <h1 *ngIf="ipset">Mit Bridge verbinden</h1>
+  <h1 *ngIf="!ipset">Bridge einrichten</h1>
   <mat-divider class="setup-divider"></mat-divider>
   <div class="setup-container">
   <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
@@ -11,8 +11,8 @@
     <input matInput id="inputId" placeholder="" [(ngModel)]="this.login.ipAdress">
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label *ngIf="login.passwordIsSet">Enter your password</mat-label>
-    <mat-label *ngIf="!login.passwordIsSet">Set your password</mat-label>
+    <mat-label *ngIf="ipset">Enter your password</mat-label>
+    <mat-label *ngIf="!ipset">Set your password</mat-label>
     <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="this.login.password">
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

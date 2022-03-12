@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 
+const IP_KEY = 'ip-adress';
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
+const PORT ='8080'
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,20 @@ export class TokenStorageService {
   signOut(): void {
     window.localStorage.clear();
   }
-
+  saveIp(ip: string){
+    window.localStorage.removeItem(IP_KEY)
+    window.localStorage.setItem(IP_KEY, ip);
+  }
+  getIp(){
+    const ipAdress: string | null = localStorage.getItem(IP_KEY);
+    if (ipAdress != null) {
+      return ipAdress;
+    }
+    return '';
+  }
+  getPort(){
+    return PORT;
+  }
   public saveToken(token: string): void {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.setItem(TOKEN_KEY, token);

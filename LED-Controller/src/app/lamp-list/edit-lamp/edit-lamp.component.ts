@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Lamp } from 'src/app/interfaces/lamp';
 import { LampsService } from 'src/app/services/lamps.service';
+import { ToolCaseService } from 'src/app/services/tool-case.service';
 
 @Component({
   selector: 'led-edit-lamp',
@@ -18,7 +19,8 @@ export class EditLampComponent implements OnInit {
   lampTyp = this.lamp.type;
 
   constructor(@Inject(MAT_DIALOG_DATA) public lamp: Lamp,
-  private lampsService: LampsService) { }
+  private lampsService: LampsService,
+  private toolCaseService: ToolCaseService,) { }
   lightType= [LightType.RGB,LightType.RGBW,LightType.NEOPIXEL]
   ngOnInit(): void {
 
@@ -26,20 +28,23 @@ export class EditLampComponent implements OnInit {
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
       next: lamp => {console.log(lamp);this.lamp = lamp},
-      error: error => {console.log(error);}})
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}})
   }
   editLamp(){
     this.lamp.name = this.lampName;
     this.lamp.type = this.lampTyp;
     this.lampsService.updateLamp(this.lamp).subscribe({
       next: data => {console.log(data)},
-      error: error => {console.log(error);}});
+      error: error => {console.log(error);
+        this.toolCaseService.isActive(error);}});
     this.getLamp();
   }
   deleteLamp(){
     this.lampsService.deleteLamp(this.lamp).subscribe({
         next: data => {console.log(data)},
-        error: error => {console.log(error);}}
+        error: error => {console.log(error);
+          this.toolCaseService.isActive(error);}}
     );
   }
 }

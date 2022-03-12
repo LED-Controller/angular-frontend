@@ -53,7 +53,25 @@
   align-items: center;
   justify-content: center;
   padding-bottom: 16px;
+  padding-top: 8px;
 }
 #spacer{
   width: 1rem;
+}
+.input-content{
+  display: flex;
+}
+.inputfields{
+  width: 95%;
+}
+.ping-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1.5rem;
+  width: 5%;
+}
+.ping-button{
+  background-color: rgba(0,0,0,0);
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 0%), 0px 6px 10px 0px rgb(0 0 0 / 0%), 0px 1px 18px 0px rgb(0 0 0 / 0%);
 }
