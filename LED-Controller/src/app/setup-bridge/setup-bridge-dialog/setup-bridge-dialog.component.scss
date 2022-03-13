@@ -66,5 +66,15 @@ h1{
   width: auto;
 }
 #error{
-  color: red;
+  color: #bb3232;
 }
+#success{
+  color: #27ab38;
+}
+#breakUp{
+  color: rgb(243, 246, 250);
+  border-color: #3f51b5;
+  }
+  ::ng-deep .mat-raised-button.mat-primary{
+    color: rgb(243, 246, 250);
+  }
