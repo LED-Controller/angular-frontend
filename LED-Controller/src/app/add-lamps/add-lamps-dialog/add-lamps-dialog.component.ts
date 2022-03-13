@@ -32,7 +32,6 @@ export class AddLampsDialogComponent implements OnInit {
         r:255,
         g:255,
         b:255,
-        w:-1
       },
       brightness: 100,
     }
