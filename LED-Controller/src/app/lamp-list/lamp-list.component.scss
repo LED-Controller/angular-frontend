@@ -146,3 +146,12 @@ justify-items: center;
 ::ng-deep .mat-slider.mat-accent .mat-slider-thumb{
   background-color: rgb(243, 246, 250);
 }
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+  background-color: rgba(243, 246, 250,0.7);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-ripple-element{
+  background-color: rgb(243, 246, 250);
+}
