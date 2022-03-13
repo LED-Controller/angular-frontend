@@ -13,7 +13,7 @@
   <div class="content">
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [ngClass]="{ 'selected': lamp == selectedItem }" (click)="index = lamp.mac">
+        <mat-card [ngClass]="{ 'selected': lamp === selectedItem && lamp.online === true}" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}">
           <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac" (click)="openEditDialog(lamp)">
             <mat-icon class="edit-icon">edit</mat-icon>
           </button>
@@ -24,12 +24,12 @@
             <div class="toggle">
                 <mat-slide-toggle
                 [checked]="lamp.on"
-                [disabled]="disabled"
+                [disabled]="!lamp.online"
                 (change)="changeIsOnState(lamp, $event)">
                 </mat-slide-toggle>
             </div>
           </div>
-          <div class="card-expand" [ngClass]="{ 'card-expand-show': index === lamp.mac }">
+          <div class="card-expand" [ngClass]="{ 'card-expand-show': (index === lamp.mac && lamp.online === true) }">
             <div class="slider-container">
               <div class="slider">
                 <mat-icon>wb_sunny</mat-icon>

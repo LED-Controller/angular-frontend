@@ -8,8 +8,6 @@ import { LampDialogComponent } from './lamp-dialog/lamp-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { EditLampComponent } from './edit-lamp/edit-lamp.component';
-import { AuthGuard } from '../services/authguard.service';
-
 
 @Component({
   selector: 'led-lamp-list',
@@ -18,9 +16,8 @@ import { AuthGuard } from '../services/authguard.service';
 })
 export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
-disabled = false;
 index="";
-selectedItem = null;
+selectedItem = {};
 countUnconLamps = 0;
 lamps: Lamp[] = [];
 unconfiguredLamps: string[] = [];
@@ -33,12 +30,15 @@ unconfiguredLamps: string[] = [];
     this.getLamps();
     this.getUnconfiguredLamps();
     this.index="";
-    this.selectedItem = null;
+    this.selectedItem= {};
   }
   //call services
   getLamps(): void {
     this.lampsService.getLamps().subscribe({
-      next: lamps => {this.lamps = lamps;},
+      next: lamps => {
+        lamps.sort((a) => (a.online === true? -1 : 1))
+        this.lamps = lamps;
+      },
       error: error =>{console.log(error);
         this.toolCaseService.isActive(error);}});
   }
@@ -78,6 +78,7 @@ unconfiguredLamps: string[] = [];
     });
   }
   focuse(item:any): void {
+    console.log(item)
     this.selectedItem = item;
   }
   openDialog(lamp: Lamp) {
@@ -106,7 +107,7 @@ unconfiguredLamps: string[] = [];
         }
       }})
     if(!found) {
-      this.selectedItem = null;
+      this.selectedItem = {};
       this.index="";
     }
   }

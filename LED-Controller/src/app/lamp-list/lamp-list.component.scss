@@ -88,6 +88,13 @@ justify-items: center;
   display: flex;
   padding-top: 16px;
 }
+.card-offline{
+  background-color: rgba(255,255, 255, 0.02);
+
+  .title{
+    color: rgba(255,255, 255, 0.4);
+  }
+}
 .slider-container{
   width: 70%;
 }

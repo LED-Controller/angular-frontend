@@ -1,5 +1,5 @@
 <div class="body">
-  <div class="edit-container">
+  <div class="edit-container" *ngIf="lamp.online === true">
     <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
       <mat-icon class="close-icon">close</mat-icon>
     </button>
@@ -19,8 +19,8 @@
       <div id="spacer"></div>
       <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="editLamp()">Übernehemen</button>
     </div>
-  </div>
   <mat-divider></mat-divider>
+  </div>
   <div class="delete-container"></div>
   <h1 class="headline">Lampe löschen</h1>
   <div class="delete-button-container">
