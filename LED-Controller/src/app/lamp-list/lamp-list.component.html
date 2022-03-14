@@ -23,7 +23,7 @@
             </div>
             <div class="toggle" id="toggle">
                 <mat-slide-toggle
-                [checked]="lamp.on"
+                [checked]="lamp.on && lamp.online"
                 [disabled]="!lamp.online"
                 (change)="changeIsOnState(lamp, $event)">
                 </mat-slide-toggle>
