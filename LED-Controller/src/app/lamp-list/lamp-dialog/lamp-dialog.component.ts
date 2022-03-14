@@ -108,6 +108,7 @@ export class LampDialogComponent implements OnInit {
           this.lamp.color.g = lamp.color.g;
           this.lamp.color.b = lamp.color.b;
           this.lamp.brightness = lamp.brightness;
+          this.lamp.on = lamp.on;
           this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
           console.log(lamp);
         },
