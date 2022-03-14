@@ -1,0 +1,157 @@
+#body{
+  background-color: #111010;
+  height: 100vh;
+}
+.header{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+.headline{
+  padding-left: 1rem;
+  margin: 0rem;
+  width: 50vw;
+  color: rgb(243, 246, 250);
+  font-size: 2rem;
+}
+.add-lamp-container{
+  width: 50vw;
+  display: flex;
+  justify-content: right;
+  padding-right: 1rem;
+}
+#infoForNewLamps{
+margin-left: 2rem;
+width: 24px;
+height: 24px;
+border-radius: 50%;
+background-color: crimson;
+display: grid;
+align-items: center;
+justify-items: center;
+}
+.content{
+  height: 80vh;
+  overflow: auto;
+}
+//cards
+.card-container{
+  padding-top: 1rem;
+  display: grid;
+  justify-items: center;
+}
+.mat-card{
+  background-color: rgba(255,255, 255, 0.1);
+  border-style: solid;
+  border-color: rgba(0,0, 0, 0);
+  width: 96vw;
+  border-radius: 1rem;
+}
+.edit-card{
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(30%, -30%);
+}
+.edit-card{
+  width: 30px;
+  height: 30px;
+  padding: 0rem;
+  background-color: rgb(51, 53, 56);
+}
+.edit-icon{
+  font-size: 18px;
+}
+:host ::ng-deep .mat-mini-fab .mat-button-wrapper{
+  padding: 0rem;
+}
+.card-head{
+  display: flex;
+  height: 6vh;
+}
+.title{
+  width: 70%;
+  align-items: center;
+  display: flex;
+  color: rgb(243, 246, 250);
+  font-size: 1.5rem;
+  padding: 0rem;
+  line-height: 1.5rem;
+}
+.card-expand{
+  height: 0vh;
+  visibility: collapse;
+}
+.card-expand-show{
+  height: auto;
+  visibility: visible;
+  display: flex;
+  padding-top: 16px;
+}
+.card-offline{
+  background-color: rgba(255,255, 255, 0.02);
+
+  .title{
+    color: rgba(255,255, 255, 0.4);
+  }
+}
+.slider-container{
+  width: 70%;
+}
+.configure-container{
+  width: 30%;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding-left: 16px;
+}
+.slider{
+  display: flex;
+  align-items: center;
+  color: rgb(243, 246, 250);
+}
+#spacer{
+  width: 1rem;
+}
+.toggle{
+  width: 30%;
+  display: grid;
+  justify-items: right;
+  align-items: center;
+  padding-right: 1rem;
+}
+.selected{
+  border-style: solid;
+  border-color: #0e73f6;
+}
+.icon{
+  color: rgb(243, 246, 250);
+  width: 20%;
+}
+.mat-slider{
+  width: 100%;
+}
+::ng-deep .mat-slide-toggle-label{
+  margin: 0rem;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb-label{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb-label-text{
+  color: #000000;
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-track-fill{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-slider.mat-accent .mat-slider-thumb{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar{
+  background-color: rgba(243, 246, 250,0.7);
+}
+::ng-deep .mat-slide-toggle.mat-checked .mat-ripple-element{
+  background-color: rgb(243, 246, 250);
+}

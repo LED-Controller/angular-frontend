@@ -1,0 +1,75 @@
+::ng-deep .mat-dialog-container {
+  background: #111010;
+  color: rgb(243, 246, 250);
+  width: 80vw;
+}
+::ng-deep .mat-dialog-container {
+  background-color: #111010;
+}
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+  background-color: rgba(0,0,0,0);
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 0%), 0px 6px 10px 0px rgb(0 0 0 / 0%), 0px 1px 18px 0px rgb(0 0 0 / 0%);
+}
+.headline{
+  text-align: center;
+}
+.setup-divider{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field{
+  width: 100%;
+}
+::ng-deep .mat-form-field-label{
+  color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline::before {
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field-ripple{
+  background-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-input-element{
+  caret-color: rgb(243, 246, 250);
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #0e73f6;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{
+  background-color: #0e73f6;
+}
+::ng-deep .mat-input-element::placeholder{
+  color: #0e73f6;
+}
+::ng-deep .mat-select-value{
+  color: rgb(243, 246, 250);
+}
+::ng-deep .mat-select-arrow{
+  color: rgb(243, 246, 250);
+}
+.submit-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 16px;
+}
+#spacer{
+  width: 1rem;
+}
+.delete-container{
+  padding-top: 16px;
+}
+.delete-button-container{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+#breakUp{
+  color: rgb(243, 246, 250);
+  border-color: #3f51b5;
+}
+::ng-deep .mat-raised-button.mat-primary{
+  color: rgb(243, 246, 250);
+}

@@ -1,0 +1,55 @@
+.body{
+  height: 100vh;
+  background-color: #111010;
+}
+.header{
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+}
+.headline{
+  padding-left: 1rem;
+  margin: 0rem;
+  width: 80vw;
+  color: rgb(243, 246, 250);
+  font-size: 2rem;
+}
+h1{
+  margin: 0rem;
+  font-size: 2rem;
+}
+.container{
+  width: 20vw;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 0rem;
+}
+.content{
+  height: 80vh;
+}
+.button-container{
+  display: grid;
+  justify-items: center;
+  padding-top: 1rem;
+}
+.newLampButtons{
+  width: 90vw;
+  height: 10vh;
+  border-radius: 1rem;
+}
+::ng-deep .container .mat-fab .mat-button-wrapper{
+  padding: 0rem;
+}
+::ng-deep .container .mat-fab.mat-primary {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0px 3px 5px -1px rgb(0 0 0 / 0%),
+              0px 6px 10px 0px rgb(0 0 0 / 0%),
+              0px 1px 18px 0px rgb(0 0 0 / 0%);
+}
+::ng-deep .container .mat-icon{
+  font-size: 2.5rem;
+  height: auto;
+  width: auto;
+}

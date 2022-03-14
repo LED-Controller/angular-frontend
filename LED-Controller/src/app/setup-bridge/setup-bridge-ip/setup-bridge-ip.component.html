@@ -1,0 +1,17 @@
+<div id="body">
+  <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1>Mit Bridge verbinden</h1>
+  <div class="setup-container">
+    <mat-form-field appearance="fill">
+      <mat-label>IP-Adresse</mat-label>
+      <input matInput id="inputId" placeholder="" autocomplete="off" [(ngModel)]="ipAdress">
+    </mat-form-field>
+  </div>
+  <div class="buttons">
+    <button mat-stroked-button color="primary" id="breakUp" mat-dialog-close>Abbruch</button>
+    <span id="space"></span>
+    <button mat-raised-button color="primary" id="continue" [mat-dialog-close]="true" (click)="testConnection()">Weiter</button>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div *ngIf="status === 'error'">
+  <h1>Keine Verbindung zur Bridge möglich!</h1>
+  <div class="content">
+    <mat-icon class="connect" id="error">error_outline</mat-icon>
+  </div>
+  <mat-progress-bar mode="determinate" value={{this.i}}></mat-progress-bar>
+</div>
+<div *ngIf="status === 'init'">
+  <h1 >Wird geladen...</h1>
+  <div class="content">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+<div id="body" *ngIf="status === 'loaded'">
+  <button mat-mini-fab class="close-button" color="primary" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1 *ngIf="this.login.pwStatus">Login</h1>
+  <h1 *ngIf="!this.login.pwStatus">Passwort festlegen</h1>
+  <div class="setup-container">
+  <mat-form-field appearance="fill">
+    <mat-label *ngIf="this.login.pwStatus">Passwort</mat-label>
+    <mat-label *ngIf="!this.login.pwStatus">Setze dein Passwort</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="this.login.password">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="buttons">
+  <button mat-stroked-button color="primary" id="breakUp" mat-dialog-close>Abbruch</button>
+  <span id="space"></span>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="connectToBridge()">Verbinden</button>
+</div>
+</div>

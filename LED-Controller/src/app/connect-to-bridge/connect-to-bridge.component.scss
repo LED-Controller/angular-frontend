@@ -1,0 +1,26 @@
+::ng-deep .mat-dialog-container {
+  background: #111010;
+  color: rgb(243, 246, 250);
+}
+.content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20vh;
+  width: 70vw;
+  font-size: 7rem;
+}
+.connect{
+  font-size: 7rem;
+  height: auto;
+  width: auto;
+}
+#error{
+  color: #bb3232;
+}
+#success{
+  color: #27ab38;
+}
+h1{
+  text-align: center;
+}
