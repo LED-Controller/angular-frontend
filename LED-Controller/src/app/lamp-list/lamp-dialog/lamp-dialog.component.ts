@@ -104,7 +104,10 @@ export class LampDialogComponent implements OnInit {
           localStorage.setItem('rgb-color-r', lamp.color.r);
           localStorage.setItem('rgb-color-g', lamp.color.g);
           localStorage.setItem('rgb-color-b', lamp.color.b);
-          this.lamp = lamp;
+          this.lamp.color.r = lamp.color.r;
+          this.lamp.color.g = lamp.color.g;
+          this.lamp.color.b = lamp.color.b;
+          this.lamp.brightness = lamp.brightness;
           this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
           console.log(lamp);
         },
