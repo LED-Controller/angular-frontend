@@ -13,7 +13,7 @@
   <div class="content">
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [ngClass]="{ 'selected': lamp === selectedItem && lamp.online === true}" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"   [style.background]="lamp.online ? 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)' : 'rgba(255,255, 255, 0.02)'">
+        <mat-card [ngClass]="{ 'selected': lamp === selectedItem && lamp.online === true}" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"   [style.background]="lamp.online ? (lamp.brightness < 10 ? (lamp.brightness == 0 ? 'rgba(255,255, 255, 0.02)' : 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.2)' ): 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)') : 'rgba(255,255, 255, 0.02)'">
           <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac" (click)="openEditDialog(lamp)">
             <mat-icon class="edit-icon">edit</mat-icon>
           </button>

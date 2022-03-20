@@ -27,7 +27,7 @@ export class EditLampComponent implements OnInit {
   }
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
-      next: lamp => {console.log(lamp);this.lamp = lamp},
+      next: lamp => {this.lamp = lamp},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}})
   }

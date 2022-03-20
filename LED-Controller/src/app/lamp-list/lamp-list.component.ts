@@ -21,7 +21,6 @@ selectedItem = {};
 countUnconLamps = 0;
 lamps: Lamp[] = [];
 unconfiguredLamps: string[] = [];
-refreshRoutine: any
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
@@ -32,13 +31,13 @@ refreshRoutine: any
     this.getUnconfiguredLamps();
     this.index="";
     this.selectedItem= {};
+    this.lampsService.Refreshrequired.subscribe(response => {
+      this.getLamps();
+    })
 
-    this.refreshRoutine = setInterval(() => {
+    let refreshRoutine = setInterval(() => {
       this.refresh()
     },2000)
-  }
-  ngOnDestroy() {
-      clearInterval(this.refreshRoutine);
   }
   //call services
   getLamps(): void {

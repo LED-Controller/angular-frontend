@@ -31,7 +31,7 @@ export class LampDialogComponent implements OnInit {
     this.getLamp()
     this.refreshRoutine = setInterval(() => {
       this.refresh()
-    },1000)
+    },2000)
   }
 
   ngOnDestroy() {
@@ -91,32 +91,32 @@ export class LampDialogComponent implements OnInit {
   },100)
 
   changeColor(r: number, g: number, b: number){
-    let lamp = this.lamp
-    lamp.color.r = r;
-    lamp.color.g = g;
-    lamp.color.b = b;
-    this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {this.refresh()},
+    this.lamp.color.r = r;
+    this.lamp.color.g = g;
+    this.lamp.color.b = b;
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
+    //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
 
   }
   changeIsOnState(event: MatSlideToggleChange):any{
-    let lamp = this.lamp
-    lamp.on = this.toolCaseService.changeIsOnState(event)
-    this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {this.refresh()},
+    this.lamp.on = this.toolCaseService.changeIsOnState(event)
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
+    //this.getLamp();
   }
   changeBrightness(event: any) {
-    let lamp = this.lamp
-    lamp.brightness = this.toolCaseService.changeBrightness(event)
-    this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {this.refresh()},
+    this.lamp.brightness = this.toolCaseService.changeBrightness(event)
+    this.lampsService.updateLamp(this.lamp).subscribe({
+      next: data => {console.log(data)},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
+    //this.getLamp();
   }
   formatLabel(value: number) {
     if (value >= 1000) {
