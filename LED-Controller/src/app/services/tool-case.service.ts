@@ -1,3 +1,4 @@
+import { LampsService } from 'src/app/services/lamps.service';
 import { Injectable } from '@angular/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';

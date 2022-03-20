@@ -22,14 +22,41 @@ export class LampDialogComponent implements OnInit {
   }
 
   colorPicker: any;
+  refreshRoutine: any;
+
   ngOnInit(): void {
     console.log(this.lamp)
     this.buildColorPicker();
     this.colorPickerRoutine;
+    this.getLamp()
+    this.refreshRoutine = setInterval(() => {
+      this.refresh()
+    },1000)
   }
+
+  ngOnDestroy() {
+    clearInterval(this.refreshRoutine);
+}
+
+  refresh(){
+    this.getLamp()
+  }
+
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
-      next: lamp => {console.log(lamp);this.lamp = lamp},
+      next: lamp => {
+        console.log(lamp);
+        localStorage.setItem('rgb-color-r', lamp.color.r+"");
+        localStorage.setItem('rgb-color-g', lamp.color.g+"");
+        localStorage.setItem('rgb-color-b', lamp.color.b+"");
+        this.lamp.color.r = lamp.color.r;
+        this.lamp.color.g = lamp.color.g;
+        this.lamp.color.b = lamp.color.b;
+        this.lamp.brightness = lamp.brightness;
+        this.lamp.on = lamp.on;
+        this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
+        console.log(lamp);
+      },
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}})
   }
@@ -64,32 +91,32 @@ export class LampDialogComponent implements OnInit {
   },100)
 
   changeColor(r: number, g: number, b: number){
-    this.lamp.color.r = r;
-    this.lamp.color.g = g;
-    this.lamp.color.b = b;
-    this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+    let lamp = this.lamp
+    lamp.color.r = r;
+    lamp.color.g = g;
+    lamp.color.b = b;
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {this.refresh()},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
 
   }
   changeIsOnState(event: MatSlideToggleChange):any{
-    this.lamp.on = this.toolCaseService.changeIsOnState(event)
-    this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+    let lamp = this.lamp
+    lamp.on = this.toolCaseService.changeIsOnState(event)
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {this.refresh()},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
   }
   changeBrightness(event: any) {
-    this.lamp.brightness = this.toolCaseService.changeBrightness(event)
-    this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+    let lamp = this.lamp
+    lamp.brightness = this.toolCaseService.changeBrightness(event)
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {this.refresh()},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
   }
   formatLabel(value: number) {
     if (value >= 1000) {

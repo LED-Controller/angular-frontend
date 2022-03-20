@@ -21,6 +21,7 @@ selectedItem = {};
 countUnconLamps = 0;
 lamps: Lamp[] = [];
 unconfiguredLamps: string[] = [];
+refreshRoutine: any
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
@@ -31,6 +32,13 @@ unconfiguredLamps: string[] = [];
     this.getUnconfiguredLamps();
     this.index="";
     this.selectedItem= {};
+
+    this.refreshRoutine = setInterval(() => {
+      this.refresh()
+    },2000)
+  }
+  ngOnDestroy() {
+      clearInterval(this.refreshRoutine);
   }
   //call services
   getLamps(): void {
@@ -46,7 +54,6 @@ unconfiguredLamps: string[] = [];
   refresh(): void {
     this.getLamps();
     this.getUnconfiguredLamps();
-    console.log("refresh")
   }
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
@@ -57,18 +64,16 @@ unconfiguredLamps: string[] = [];
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
     lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {this.refresh()},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamps()
   }
   changeBrightness(event: any, lamp: Lamp) {
     lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {this.refresh()},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamps()
   }
   //define own services
   countUnconfiguredLamps(lamps: any): void {
