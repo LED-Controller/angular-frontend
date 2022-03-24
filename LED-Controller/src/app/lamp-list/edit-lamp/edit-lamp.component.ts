@@ -26,10 +26,11 @@ export class EditLampComponent implements OnInit {
 
   }
   getLamp(): void {
+    /*
     this.lampsService.getLamp(this.lamp).subscribe({
       next: lamp => {this.lamp = lamp},
       error: error => {console.log(error);
-        this.toolCaseService.isActive(error);}})
+        this.toolCaseService.isActive(error);}})*/
   }
   editLamp(){
     this.lamp.name = this.lampName;

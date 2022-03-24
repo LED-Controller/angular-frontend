@@ -17,10 +17,12 @@ import { EditLampComponent } from './edit-lamp/edit-lamp.component';
 export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
 index="";
-selectedItem = {};
+selectedItemMac = "";
 countUnconLamps = 0;
 lamps: Lamp[] = [];
 unconfiguredLamps: string[] = [];
+sub: any;
+refreshRoutine: any;
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
@@ -30,17 +32,29 @@ unconfiguredLamps: string[] = [];
     this.getLamps();
     this.getUnconfiguredLamps();
     this.index="";
-    this.selectedItem= {};
-    this.lampsService.Refreshrequired.subscribe(response => {
+    this.selectedItemMac = "";
+    this.sub = this.lampsService.Refreshrequired.subscribe(response => {
       this.getLamps();
     })
-
-    let refreshRoutine = setInterval(() => {
-      this.refresh()
-    },2000)
+    let i = 0
+    this.refreshRoutine = setInterval(() => {
+      if(i === 5){
+        this.getUnconfiguredLamps()
+        i = 0
+      }
+      this.getLamps()
+      i++
+    },3000)
   }
+
+  ngOnDestroy():void{
+    this.sub.unsubscribe();
+    clearInterval(this.refreshRoutine)
+  }
+
   //call services
   getLamps(): void {
+    console.log(this.selectedItemMac)
     this.lampsService.getLamps().subscribe({
       next: lamps => {
         lamps.sort((a) => (a.online === true? -1 : 1))
@@ -50,10 +64,6 @@ unconfiguredLamps: string[] = [];
         this.toolCaseService.isActive(error);}});
   }
 
-  refresh(): void {
-    this.getLamps();
-    this.getUnconfiguredLamps();
-  }
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
       next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps; this.countUnconfiguredLamps(lamps);},
@@ -63,14 +73,14 @@ unconfiguredLamps: string[] = [];
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
     lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {this.refresh()},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }
   changeBrightness(event: any, lamp: Lamp) {
     lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {this.refresh()},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }
@@ -82,9 +92,9 @@ unconfiguredLamps: string[] = [];
     });
   }
   focuse(item:any): void {
-    console.log(item)
-    this.selectedItem = item;
+    this.selectedItemMac = item.mac;
   }
+
   openDialog(lamp: Lamp) {
     const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp},);
 
@@ -111,7 +121,7 @@ unconfiguredLamps: string[] = [];
         }
       }})
     if(!found) {
-      this.selectedItem = {};
+      this.selectedItemMac = "";
       this.index="";
     }
   }

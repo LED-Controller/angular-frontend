@@ -15,6 +15,12 @@ export class LampsService {
     return this._refreshrequired
   }
 
+  private _lampRefreshrequired = new Subject<void>();
+
+  get LampRefreshrequired() {
+    return this._lampRefreshrequired
+  }
+
   constructor(private httpClient: HttpClient,private tokenStorageService: TokenStorageService) { }
   ip='';
   port='';
@@ -25,7 +31,9 @@ export class LampsService {
   getLamps(): Observable<Lamp[]> {
     this.getCredentials();
     //return this.httpClient.get<Lamp[]>(`http://${this.ip}:${this.port}/lamps`);
-    return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`);
+    return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`).pipe(tap(() => {
+      this.LampRefreshrequired.next();
+    }));
   }
   getLamp(lamp: Lamp): Observable<Lamp>{
     this.getCredentials();

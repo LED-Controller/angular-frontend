@@ -20,8 +20,8 @@ export class LoginService {
     this.getCredentials();
     console.log(this.ip)
     console.log(this.port)
-    //return this.httpClient.get<PasswordIsAlreadySet>(`http://${this.ip}:${this.port}/login/passwordstatus`)
-    return this.httpClient.get<PasswordIsAlreadySet>(`http://localhost:8080/login/passwordstatus`)
+    return this.httpClient.get<PasswordIsAlreadySet>(`http://${this.ip}:${this.port}/login/passwordstatus`)
+    //return this.httpClient.get<PasswordIsAlreadySet>(`http://localhost:8080/login/passwordstatus`)
   }
 
   setPassword(pass: Password): Observable<any>{
