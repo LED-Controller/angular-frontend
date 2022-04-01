@@ -30,33 +30,45 @@ export class LampsService {
   }
   getLamps(): Observable<Lamp[]> {
     this.getCredentials();
-    //return this.httpClient.get<Lamp[]>(`http://${this.ip}:${this.port}/lamps`);
+    return this.httpClient.get<Lamp[]>(`http://${this.ip}:${this.port}/lamps`).pipe(tap(() => {
+      this.LampRefreshrequired.next();
+    }));
+    /*
     return this.httpClient.get<Lamp[]>(`http://localhost:8080/lamps`).pipe(tap(() => {
       this.LampRefreshrequired.next();
     }));
+    */
   }
   getLamp(lamp: Lamp): Observable<Lamp>{
     this.getCredentials();
-    //return this.httpClient.get<Lamp>(`http://${this.ip}:${this.port}/lamps${lamp.mac}`);
-    return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
+    return this.httpClient.get<Lamp>(`http://${this.ip}:${this.port}/lamps${lamp.mac}`);
+    //return this.httpClient.get<Lamp>(`http://localhost:8080/lamps/${lamp.mac}`);
   }
   updateLamp(lamp: Lamp): Observable<Lamp> {
     this.getCredentials();
-    //return this.httpClient.post<Lamp>(`http://${this.ip}:${this.port}/update/`,lamp);
+    return this.httpClient.post<Lamp>(`http://${this.ip}:${this.port}/update/`,lamp).pipe(tap(() => {
+      this.Refreshrequired.next();
+    }));
+    /*
     return this.httpClient.post<Lamp>(`http://localhost:8080/update/`,lamp).pipe(tap(() => {
       this.Refreshrequired.next();
     }))
+    */
   }
   deleteLamp(lamp: Lamp): Observable<void> {
     this.getCredentials();
-    //return this.httpClient.delete<void>(`http://${this.ip}:${this.port}/delete/${lamp.mac}`);
-    return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
+    return this.httpClient.delete<void>(`http://${this.ip}:${this.port}/delete/${lamp.mac}`);
+    //return this.httpClient.delete<void>(`http://localhost:8080/delete/${lamp.mac}`);
   }
   randomize(lamp: Lamp): Observable<any> {
     this.getCredentials();
-    //return this.httpClient.post<any>(`http://${this.ip}:${this.port}/random`,lamp.mac);
+    return this.httpClient.post<any>(`http://${this.ip}:${this.port}/random`,lamp.mac).pipe(tap(() => {
+      this.Refreshrequired.next();
+    }));
+    /*
     return this.httpClient.post<any>(`http://localhost:8080/random`,lamp.mac).pipe(tap(() => {
       this.Refreshrequired.next();
     }))
+    */
   }
 }

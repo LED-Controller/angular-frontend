@@ -26,13 +26,13 @@ export class LoginService {
 
   setPassword(pass: Password): Observable<any>{
     this.getCredentials();
-    //return this.httpClient.post<any>(`http://${this.ip}:${this.port}/login/password`,pass);
-    return this.httpClient.post<any>(`http://localhost:8080/login/password`,pass);
+    return this.httpClient.post<any>(`http://${this.ip}:${this.port}/login/password`,pass);
+    //return this.httpClient.post<any>(`http://localhost:8080/login/password`,pass);
   }
 
   authenticate(pass: Password): Observable<any>{
     this.getCredentials();
-    //return this.httpClient.post<any>(`http://${this.ip}:${this.port}/login`,pass)
-    return this.httpClient.post<any>(`http://localhost:8080/login`,pass)
+    return this.httpClient.post<any>(`http://${this.ip}:${this.port}/login`,pass)
+    //return this.httpClient.post<any>(`http://localhost:8080/login`,pass)
   }
 }
