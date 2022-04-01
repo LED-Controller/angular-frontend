@@ -43,21 +43,35 @@ export class LampDialogComponent implements OnInit {
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
       next: lamp => {
-        if(lamp !== this.lamp)
-        {
-          localStorage.setItem('rgb-color-r', lamp.color.r+"");
-          localStorage.setItem('rgb-color-g', lamp.color.g+"");
-          localStorage.setItem('rgb-color-b', lamp.color.b+"");
-          this.lamp.color.r = lamp.color.r;
-          this.lamp.color.g = lamp.color.g;
-          this.lamp.color.b = lamp.color.b;
-          this.lamp.brightness = lamp.brightness;
-          this.lamp.on = lamp.on;
-          this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
-        }
+        this.modifyLamp(lamp, this.lamp);
         },
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}})
+  }
+  modifyLamp(newLamp: Lamp, currentLamp: Lamp){
+    let modify = false
+    if(newLamp !== undefined)
+    {
+      if(newLamp.mac === currentLamp.mac && newLamp.name === currentLamp.name){
+        if(newLamp.on === currentLamp.on && newLamp.online === currentLamp.online){
+          if(newLamp.type === currentLamp.type && newLamp.brightness === currentLamp.brightness){
+            	if(newLamp.color.r === currentLamp.color.r && newLamp.color.g === currentLamp.color.g && newLamp.color.b === currentLamp.color.b)
+              {}else{modify = true;}
+          }else{modify = true;}
+        }else{modify = true;}
+      }else{modify = true;}
+    }else{modify = true;}
+    if(modify){
+        localStorage.setItem('rgb-color-r', newLamp.color.r+"");
+          localStorage.setItem('rgb-color-g', newLamp.color.g+"");
+          localStorage.setItem('rgb-color-b', newLamp.color.b+"");
+          this.lamp.color.r = newLamp.color.r;
+          this.lamp.color.g = newLamp.color.g;
+          this.lamp.color.b = newLamp.color.b;
+          this.lamp.brightness = newLamp.brightness;
+          this.lamp.on = newLamp.on;
+          this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
+    }
   }
   buildColorPicker(){
     this.colorPicker = iro.ColorPicker('#color-picker',{

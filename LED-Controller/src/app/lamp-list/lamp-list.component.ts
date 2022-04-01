@@ -57,11 +57,36 @@ refreshRoutine: any;
     console.log(this.selectedItemMac)
     this.lampsService.getLamps().subscribe({
       next: lamps => {
-        lamps.sort((a) => (a.online === true? -1 : 1))
+        lamps.sort((a) => (a.online === true? -1 : 1));
+        this.modifycheck(lamps,this.lamps);
         this.lamps = lamps;
       },
       error: error =>{console.log(error);
         this.toolCaseService.isActive(error);}});
+  }
+
+  modifycheck(newLamps: Lamp[], currentLamps: Lamp[]): void{
+    let modify = false
+    if(newLamps.length === currentLamps.length)
+    {
+      for (let i in newLamps){
+        if(newLamps[i] !== undefined )
+        {
+          if(newLamps[i].mac === currentLamps[i].mac && newLamps[i].name === currentLamps[i].name){
+            if(newLamps[i].on === currentLamps[i].on && newLamps[i].online === currentLamps[i].online){
+              if(newLamps[i].type === currentLamps[i].type && newLamps[i].brightness === currentLamps[i].brightness){
+                  if(newLamps[i].color.r === currentLamps[i].color.r && newLamps[i].color.g === currentLamps[i].color.g && newLamps[i].color.b === currentLamps[i].color.b)
+                  {}else{modify = true;}
+              }else{modify = true;}
+            }else{modify = true;}
+          }else{modify = true;}
+        }else{modify = true;}
+      }
+    }else{modify = true;}
+    if(modify){
+      this.lamps = newLamps;
+      console.log(modify)
+    }
   }
 
   getUnconfiguredLamps(): void {
