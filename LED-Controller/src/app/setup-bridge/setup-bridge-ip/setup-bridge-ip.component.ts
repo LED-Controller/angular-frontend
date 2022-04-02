@@ -18,7 +18,7 @@ export class SetupBridgeIpComponent implements OnInit {
   ngOnInit(): void {
   }
   testConnection(){
-
+    this.tokenStorageService.saveIp(this.ipAdress)
     const dialogRef = this.dialog.open(SetupBridgeDialogComponent,{data: this.ipAdress});
 
     dialogRef.afterClosed().subscribe(result => {

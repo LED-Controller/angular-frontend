@@ -1,4 +1,4 @@
-<div id="body" (focus)="refresh()">
+<div id="body">
   <div class="header">
     <h1 class="headline">Lampen</h1>
     <div class="add-lamp-container">
@@ -13,7 +13,8 @@
   <div class="content">
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [ngClass]="{ 'selected': lamp === selectedItem && lamp.online === true}" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"   [style.background]="lamp.online ? 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)' : 'rgba(255,255, 255, 0.02)'">
+        <mat-card [style]="lamp.mac === this.selectedItemMac && lamp.online === true ? 'border-style: solid;border-color: #0e73f6;' : ''" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"
+        [style.background]="lamp.online ? (lamp.brightness < 10 ? (lamp.brightness == 0 ? 'rgba(255,255, 255, 0.02)' : 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.2)' ): 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)') : 'rgba(255,255, 255, 0.02)'">
           <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac" (click)="openEditDialog(lamp)">
             <mat-icon class="edit-icon">edit</mat-icon>
           </button>
@@ -40,7 +41,7 @@
                   [value]="lamp.brightness* 1000"
                   tickInterval="1000"
                   step="1000"
-                  min="0"
+                  min="1000"
                   max="100000"
                   aria-label="units"
                   (change)="changeBrightness($event, lamp)">

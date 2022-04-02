@@ -18,6 +18,7 @@ export class AddLampsComponent implements OnInit {
               ) { }
 
   unconfiguredLamps: string[] = [];
+  refreshRoutine:any
 
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
@@ -29,10 +30,16 @@ export class AddLampsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUnconfiguredLamps();
+
+    this.refreshRoutine = setInterval(() => {
+      this.refresh()
+    },10000)
   }
+  ngOnDestroy() {
+    clearInterval(this.refreshRoutine);
+}
   refresh(): void {
     this.getUnconfiguredLamps();
-    console.log("refresh")
   }
   openDialog(mac: string) {
     this.identifyLamp(mac);

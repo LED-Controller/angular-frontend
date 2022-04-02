@@ -17,10 +17,12 @@ import { EditLampComponent } from './edit-lamp/edit-lamp.component';
 export class LampListComponent implements OnInit {
 color: ThemePalette = 'accent';
 index="";
-selectedItem = {};
+selectedItemMac = "";
 countUnconLamps = 0;
 lamps: Lamp[] = [];
 unconfiguredLamps: string[] = [];
+sub: any;
+refreshRoutine: any;
 
   constructor(private lampsService: LampsService,
               private unconfiguredLampsService: UnconfiguredLampsService,
@@ -30,24 +32,67 @@ unconfiguredLamps: string[] = [];
     this.getLamps();
     this.getUnconfiguredLamps();
     this.index="";
-    this.selectedItem= {};
+    this.selectedItemMac = "";
+    this.sub = this.lampsService.Refreshrequired.subscribe(response => {
+      this.getLamps();
+    })
+    let i = 0
+    this.refreshRoutine = setInterval(() => {
+      if(i === 5){
+        this.getUnconfiguredLamps()
+        i = 0
+      }
+      this.getLamps()
+      i++
+    },3000)
   }
+
+  ngOnDestroy():void{
+    this.sub.unsubscribe();
+    clearInterval(this.refreshRoutine)
+  }
+
   //call services
   getLamps(): void {
+    console.log(this.selectedItemMac)
     this.lampsService.getLamps().subscribe({
       next: lamps => {
-        lamps.sort((a) => (a.online === true? -1 : 1))
-        this.lamps = lamps;
+        lamps.sort((a) => (a.online === true? -1 : 1));
+        this.modifycheck(lamps,this.lamps);
       },
       error: error =>{console.log(error);
         this.toolCaseService.isActive(error);}});
   }
 
-  refresh(): void {
-    this.getLamps();
-    this.getUnconfiguredLamps();
-    console.log("refresh")
+  modifycheck(newLamps: Lamp[], currentLamps: Lamp[]): void{
+    let modify = false
+    if(newLamps.length === currentLamps.length)
+    {
+      for (let i in newLamps){
+        if(newLamps[i] !== undefined )
+        {
+          if(newLamps[i].mac === currentLamps[i].mac && newLamps[i].name === currentLamps[i].name){
+            if(newLamps[i].on === currentLamps[i].on && newLamps[i].online === currentLamps[i].online){
+              if(newLamps[i].type === currentLamps[i].type && newLamps[i].brightness === currentLamps[i].brightness){
+                  if(newLamps[i].color.r === currentLamps[i].color.r && newLamps[i].color.g === currentLamps[i].color.g && newLamps[i].color.b === currentLamps[i].color.b)
+                  {}else{modify = true;}
+              }else{modify = true;}
+            }else{modify = true;}
+          }else{modify = true;}
+        }else{modify = true;}
+      }
+    }else{modify = true;}
+    if(modify){
+      this.updateAllLamps(newLamps)
+    }
   }
+  updateAllLamps(newLamps: Lamp[]){
+    this.lamps = newLamps;
+    for (let i in newLamps){
+      this.lamps[i].brightness = newLamps[i].brightness;
+    }
+  }
+
   getUnconfiguredLamps(): void {
     this.unconfiguredLampsService.getUnconfiguredLamps().subscribe({
       next: lamps => {console.log(lamps); this.unconfiguredLamps = lamps; this.countUnconfiguredLamps(lamps);},
@@ -55,20 +100,20 @@ unconfiguredLamps: string[] = [];
         this.toolCaseService.isActive(error);}});
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
-    lamp.on = this.toolCaseService.changeIsOnState(event)
+    lamp.on = this.toolCaseService.changeIsOnState(event);
+    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].on = lamp.on;
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamps()
   }
   changeBrightness(event: any, lamp: Lamp) {
-    lamp.brightness = this.toolCaseService.changeBrightness(event)
+    lamp.brightness = this.toolCaseService.changeBrightness(event);
+    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].brightness = lamp.brightness;
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamps()
   }
   //define own services
   countUnconfiguredLamps(lamps: any): void {
@@ -78,9 +123,9 @@ unconfiguredLamps: string[] = [];
     });
   }
   focuse(item:any): void {
-    console.log(item)
-    this.selectedItem = item;
+    this.selectedItemMac = item.mac;
   }
+
   openDialog(lamp: Lamp) {
     const dialogRef = this.dialog.open(LampDialogComponent, {data: lamp},);
 
@@ -107,7 +152,7 @@ unconfiguredLamps: string[] = [];
         }
       }})
     if(!found) {
-      this.selectedItem = {};
+      this.selectedItemMac = "";
       this.index="";
     }
   }

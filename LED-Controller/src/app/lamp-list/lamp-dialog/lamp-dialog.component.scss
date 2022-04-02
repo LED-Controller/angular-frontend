@@ -64,3 +64,9 @@ float: right;
 ::ng-deep .mat-slider.mat-accent .mat-slider-thumb{
   background-color: white;
 }
+#color-picker{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}

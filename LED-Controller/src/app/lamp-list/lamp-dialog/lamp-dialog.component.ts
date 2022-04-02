@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToolCaseService } from 'src/app/services/tool-case.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { LampsService } from 'src/app/services/lamps.service';
+import { LightType } from 'src/app/interfaces/lightType';
 
 @Component({
   selector: 'led-lamp-dialog',
@@ -22,16 +23,57 @@ export class LampDialogComponent implements OnInit {
   }
 
   colorPicker: any;
+  refreshRoutine: any;
+  sub:any;
+  neopixel = LightType.NEOPIXEL;
+
   ngOnInit(): void {
     console.log(this.lamp)
     this.buildColorPicker();
     this.colorPickerRoutine;
+    this.getLamp()
+    this.sub = this.lampsService.LampRefreshrequired.subscribe(response => {
+      this.getLamp();
+    })
   }
+
+  ngOnDestroy():void{
+    //this.lampsService.LampRefreshrequired.unsubscribe();
+    this.sub.unsubscribe();
+  }
+
   getLamp(): void {
     this.lampsService.getLamp(this.lamp).subscribe({
-      next: lamp => {console.log(lamp);this.lamp = lamp},
+      next: lamp => {
+        this.modifyLamp(lamp, this.lamp);
+        },
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}})
+  }
+  modifyLamp(newLamp: Lamp, currentLamp: Lamp){
+    let modify = false
+    localStorage.setItem('rgb-color-r', newLamp.color.r+"");
+    localStorage.setItem('rgb-color-g', newLamp.color.g+"");
+    localStorage.setItem('rgb-color-b', newLamp.color.b+"");
+    if(newLamp !== undefined)
+    {
+      if(newLamp.mac === currentLamp.mac && newLamp.name === currentLamp.name){
+        if(newLamp.on === currentLamp.on && newLamp.online === currentLamp.online){
+          if(newLamp.type === currentLamp.type && newLamp.brightness === currentLamp.brightness){
+            	if(newLamp.color.r === currentLamp.color.r && newLamp.color.g === currentLamp.color.g && newLamp.color.b === currentLamp.color.b)
+              {}else{modify = true;}
+          }else{modify = true;}
+        }else{modify = true;}
+      }else{modify = true;}
+    }else{modify = true;}
+    if(modify){
+          this.lamp.color.r = newLamp.color.r;
+          this.lamp.color.g = newLamp.color.g;
+          this.lamp.color.b = newLamp.color.b;
+          this.lamp.brightness = newLamp.brightness;
+          this.lamp.on = newLamp.on;
+          this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
+    }
   }
   buildColorPicker(){
     this.colorPicker = iro.ColorPicker('#color-picker',{
@@ -68,28 +110,25 @@ export class LampDialogComponent implements OnInit {
     this.lamp.color.g = g;
     this.lamp.color.b = b;
     this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
     console.log(`(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`);
 
   }
   changeIsOnState(event: MatSlideToggleChange):any{
     this.lamp.on = this.toolCaseService.changeIsOnState(event)
     this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
   }
   changeBrightness(event: any) {
     this.lamp.brightness = this.toolCaseService.changeBrightness(event)
     this.lampsService.updateLamp(this.lamp).subscribe({
-      next: data => {console.log(data)},
+      next: data => {this.lamp.brightness = this.toolCaseService.changeBrightness(event)},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
-    //this.getLamp();
   }
   formatLabel(value: number) {
     if (value >= 1000) {
@@ -108,14 +147,13 @@ export class LampDialogComponent implements OnInit {
           this.lamp.color.g = lamp.color.g;
           this.lamp.color.b = lamp.color.b;
           this.lamp.brightness = lamp.brightness;
+          this.lamp.on = lamp.on;
           this.colorPicker.color.rgbString=`rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`
-          console.log(lamp);
         },
         error: error => {
           console.log(error);
           this.toolCaseService.isActive(error);
         }})
-    //this.getLamp();
   }
   onClose(){
     clearInterval(this.colorPickerRoutine);

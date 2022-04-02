@@ -39,7 +39,7 @@ export class SetupBridgeDialogComponent implements OnInit {
     this.loginService.getPasswordStatus().subscribe({
       next: data => {this.login.pwStatus = data.passwordIsAlreadySet;
         this.status="loaded";
-        this.tokenStorageService.saveIp(this.login.ipAdress)},
+      },
       error: error => {console.log(error);
       this.status="error";
       this.i = 0;
