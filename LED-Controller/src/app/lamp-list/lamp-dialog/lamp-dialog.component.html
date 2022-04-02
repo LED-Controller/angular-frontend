@@ -38,6 +38,7 @@
     </div>
   </div>
   <div class="neopixel">
+    <div *ngIf="lamp.type === neopixel">
     <mat-divider></mat-divider>
     <div class="neopixel-buttons-container">
       <button mat-icon-button color="basic" class="random">
@@ -52,6 +53,7 @@
         <mat-icon>queue_music</mat-icon>
       </button>
     </div>
+  </div>
   </div>
   <mat-divider></mat-divider>
   <div class="submit-button">

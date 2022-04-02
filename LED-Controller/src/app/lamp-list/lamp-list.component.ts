@@ -96,14 +96,16 @@ refreshRoutine: any;
         this.toolCaseService.isActive(error);}});
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
-    lamp.on = this.toolCaseService.changeIsOnState(event)
+    lamp.on = this.toolCaseService.changeIsOnState(event);
+    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].on = lamp.on;
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }
   changeBrightness(event: any, lamp: Lamp) {
-    lamp.brightness = this.toolCaseService.changeBrightness(event)
+    lamp.brightness = this.toolCaseService.changeBrightness(event);
+    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].brightness = lamp.brightness;
     this.lampsService.updateLamp(lamp).subscribe({
       next: data => {},
       error: error => {console.log(error);

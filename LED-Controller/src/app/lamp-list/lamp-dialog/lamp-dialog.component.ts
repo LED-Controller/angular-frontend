@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToolCaseService } from 'src/app/services/tool-case.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { LampsService } from 'src/app/services/lamps.service';
+import { LightType } from 'src/app/interfaces/lightType';
 
 @Component({
   selector: 'led-lamp-dialog',
@@ -24,6 +25,7 @@ export class LampDialogComponent implements OnInit {
   colorPicker: any;
   refreshRoutine: any;
   sub:any;
+  neopixel = LightType.NEOPIXEL;
 
   ngOnInit(): void {
     console.log(this.lamp)
