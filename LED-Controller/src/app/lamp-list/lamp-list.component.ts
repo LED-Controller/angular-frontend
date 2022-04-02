@@ -59,7 +59,6 @@ refreshRoutine: any;
       next: lamps => {
         lamps.sort((a) => (a.online === true? -1 : 1));
         this.modifycheck(lamps,this.lamps);
-        this.lamps = lamps;
       },
       error: error =>{console.log(error);
         this.toolCaseService.isActive(error);}});
@@ -84,8 +83,13 @@ refreshRoutine: any;
       }
     }else{modify = true;}
     if(modify){
-      this.lamps = newLamps;
-      console.log(modify)
+      this.updateAllLamps(newLamps)
+    }
+  }
+  updateAllLamps(newLamps: Lamp[]){
+    this.lamps = newLamps;
+    for (let i in newLamps){
+      this.lamps[i].brightness = newLamps[i].brightness;
     }
   }
 

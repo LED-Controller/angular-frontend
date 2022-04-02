@@ -52,6 +52,9 @@ export class LampDialogComponent implements OnInit {
   }
   modifyLamp(newLamp: Lamp, currentLamp: Lamp){
     let modify = false
+    localStorage.setItem('rgb-color-r', newLamp.color.r+"");
+    localStorage.setItem('rgb-color-g', newLamp.color.g+"");
+    localStorage.setItem('rgb-color-b', newLamp.color.b+"");
     if(newLamp !== undefined)
     {
       if(newLamp.mac === currentLamp.mac && newLamp.name === currentLamp.name){
@@ -64,9 +67,6 @@ export class LampDialogComponent implements OnInit {
       }else{modify = true;}
     }else{modify = true;}
     if(modify){
-        localStorage.setItem('rgb-color-r', newLamp.color.r+"");
-          localStorage.setItem('rgb-color-g', newLamp.color.g+"");
-          localStorage.setItem('rgb-color-b', newLamp.color.b+"");
           this.lamp.color.r = newLamp.color.r;
           this.lamp.color.g = newLamp.color.g;
           this.lamp.color.b = newLamp.color.b;
