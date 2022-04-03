@@ -108,10 +108,10 @@ refreshRoutine: any;
         this.toolCaseService.isActive(error);}});
   }
   changeBrightness(event: any, lamp: Lamp) {
-    lamp.brightness = this.toolCaseService.changeBrightness(event);
-    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].brightness = lamp.brightness;
-    this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {},
+    let i = this.lamps.findIndex(x => x.mac === lamp.mac);
+    this.lamps[i].brightness = this.toolCaseService.changeBrightness(event);
+    this.lampsService.updateLamp(this.lamps[i]).subscribe({
+      next: data => {this.lamps[i].brightness = lamp.brightness;},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }

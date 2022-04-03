@@ -5,56 +5,49 @@
       <button mat-fab color="primary" [routerLink]="'add-lamps'">
         <mat-icon>add</mat-icon>
         <div id="infoForNewLamps" *ngIf="countUnconLamps > 0">
-        {{countUnconLamps}}
+          {{countUnconLamps}}
         </div>
       </button>
     </div>
   </div>
   <div class="content">
     <mat-divider></mat-divider>
-    <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)" >
-        <mat-card [style]="lamp.mac === this.selectedItemMac && lamp.online === true ? 'border-style: solid;border-color: #0e73f6;' : ''" (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"
+    <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)">
+      <mat-card
+        [style]="lamp.mac === this.selectedItemMac && lamp.online === true ? 'border-style: solid;border-color: #0e73f6;' : ''"
+        (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"
         [style.background]="lamp.online ? (lamp.brightness < 10 ? (lamp.brightness == 0 ? 'rgba(255,255, 255, 0.02)' : 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.2)' ): 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)') : 'rgba(255,255, 255, 0.02)'">
-          <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac" (click)="openEditDialog(lamp)">
-            <mat-icon class="edit-icon">edit</mat-icon>
-          </button>
-          <div class="card-head">
-            <div class="title">
-              {{lamp.name}}
-            </div>
-            <div class="toggle" id="toggle">
-                <mat-slide-toggle
-                [checked]="lamp.on && lamp.online"
-                [disabled]="!lamp.online"
-                (change)="changeIsOnState(lamp, $event)">
-                </mat-slide-toggle>
+        <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac"
+          (click)="openEditDialog(lamp)">
+          <mat-icon class="edit-icon">edit</mat-icon>
+        </button>
+        <div class="card-head">
+          <div class="title">
+            {{lamp.name}}
+          </div>
+          <div class="toggle" id="toggle">
+            <mat-slide-toggle [checked]="lamp.on && lamp.online" [disabled]="!lamp.online"
+              (change)="changeIsOnState(lamp, $event)">
+            </mat-slide-toggle>
+          </div>
+        </div>
+        <div class="card-expand" [ngClass]="{ 'card-expand-show': (index === lamp.mac && lamp.online === true) }">
+          <div class="slider-container">
+            <div class="slider">
+              <mat-icon>wb_sunny</mat-icon>
+              <div id="spacer"></div>
+              <mat-slider thumbLabel [displayWith]="formatLabel" [value]="lamp.brightness* 1000" tickInterval="1000"
+                step="1000" min="1000" max="100000" aria-label="units" (change)="changeBrightness($event, lamp)">
+              </mat-slider>
             </div>
           </div>
-          <div class="card-expand" [ngClass]="{ 'card-expand-show': (index === lamp.mac && lamp.online === true) }">
-            <div class="slider-container">
-              <div class="slider">
-                <mat-icon>wb_sunny</mat-icon>
-                <div id="spacer"></div>
-                <mat-slider
-                  thumbLabel
-                  [displayWith]="formatLabel"
-                  [value]="lamp.brightness* 1000"
-                  tickInterval="1000"
-                  step="1000"
-                  min="1000"
-                  max="100000"
-                  aria-label="units"
-                  (change)="changeBrightness($event, lamp)">
-                </mat-slider>
-              </div>
-            </div>
-            <div class="configure-container">
-              <button mat-fab color="primary" (click)="openDialog(lamp)">
-                <mat-icon>color_lens</mat-icon>
-              </button>
-            </div>
+          <div class="configure-container">
+            <button mat-fab color="primary" (click)="openDialog(lamp)">
+              <mat-icon>color_lens</mat-icon>
+            </button>
           </div>
-        </mat-card>
+        </div>
+      </mat-card>
     </div>
   </div>
   <mat-divider></mat-divider>
