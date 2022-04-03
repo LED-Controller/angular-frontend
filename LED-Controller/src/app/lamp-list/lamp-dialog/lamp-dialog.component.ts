@@ -28,18 +28,20 @@ export class LampDialogComponent implements OnInit {
   neopixel = LightType.NEOPIXEL;
 
   ngOnInit(): void {
-    console.log(this.lamp)
-    this.buildColorPicker();
-    this.colorPickerRoutine;
     this.getLamp()
     this.sub = this.lampsService.LampRefreshrequired.subscribe(response => {
       this.getLamp();
     })
+    this.buildColorPicker();
+    this.colorPickerRoutine;
   }
 
   ngOnDestroy():void{
     //this.lampsService.LampRefreshrequired.unsubscribe();
     this.sub.unsubscribe();
+    localStorage.removeItem('rgb-color-r');
+    localStorage.removeItem('rgb-color-g');
+    localStorage.removeItem('rgb-color-b');
   }
 
   getLamp(): void {
@@ -84,7 +86,6 @@ export class LampDialogComponent implements OnInit {
         },
       ],
       width: 270,
-      //color: `rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`,
       color: `rgb(${this.lamp.color.r},${this.lamp.color.g},${this.lamp.color.b})`,
       wheelLightness: false,
     })
