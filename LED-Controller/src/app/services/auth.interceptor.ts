@@ -13,7 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private token: TokenStorageService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
-    console.log("intercept")
     let authReq = req;
     const token = this.token.getToken();
     if (token != null) {

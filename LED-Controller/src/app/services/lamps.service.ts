@@ -3,6 +3,7 @@ import { Lamp } from './../interfaces/lamp';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, tap } from 'rxjs';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class LampsService {
   }
   getLamps(): Observable<Lamp[]> {
     this.getCredentials();
-    return this.httpClient.get<Lamp[]>(`http://${this.ip}:${this.port}/lamps`).pipe(tap(() => {
+    return this.httpClient.get<Lamp[]>(`http://${this.ip}:${this.port}/lamps`).pipe(timeout(2000),tap(() => {
       this.LampRefreshrequired.next();
     }));
 
@@ -54,5 +55,10 @@ export class LampsService {
     return this.httpClient.post<any>(`http://${this.ip}:${this.port}/random`,lamp.mac).pipe(tap(() => {
       this.Refreshrequired.next();
     }));
+  }
+  effect(lamp: Lamp, effectName: any): Observable<void>{
+    this.getCredentials();
+    let body = `{"effectName": ${effectName},"mac": ${lamp.mac}}`
+    return this.httpClient.post<any>(`http://${this.ip}:${this.port}/effect`,body);
   }
 }
