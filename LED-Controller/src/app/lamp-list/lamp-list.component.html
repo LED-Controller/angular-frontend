@@ -38,7 +38,11 @@
               <mat-icon>wb_sunny</mat-icon>
               <div id="spacer"></div>
               <mat-slider thumbLabel [displayWith]="formatLabel" [value]="lamp.brightness* 1000" tickInterval="1000"
-                step="1000" min="1000" max="100000" aria-label="units" (change)="changeBrightness($event, lamp)">
+                step="1000" min="1000" max="100000" aria-label="units"
+                #myslider
+                (slideend)="changeBrightness(lamp,myslider.value)"
+                (pointerup)="changeBrightness(lamp,myslider.value)"
+                >
               </mat-slider>
             </div>
           </div>

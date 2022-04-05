@@ -84,16 +84,7 @@ refreshRoutine: any;
       }
     }else{modify = true;}
     if(modify){
-      this.updateAllLamps(newLamps)
-    }
-  }
-  updateAllLamps(newLamps: Lamp[]){
-    this.lamps = newLamps;
-    for (let i in newLamps){
-      this.lamps[i].brightness = newLamps[i].brightness;
-      this.lamps[i].color.r = newLamps[i].color.r;
-      this.lamps[i].color.g = newLamps[i].color.g;
-      this.lamps[i].color.b = newLamps[i].color.b;
+      this.lamps = newLamps;
     }
   }
 
@@ -105,17 +96,16 @@ refreshRoutine: any;
   }
   changeIsOnState(lamp: Lamp, event: MatSlideToggleChange):any{
     lamp.on = this.toolCaseService.changeIsOnState(event);
-    this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].on = lamp.on;
     this.lampsService.updateLamp(lamp).subscribe({
-      next: data => {},
+      next: data => {this.lamps[this.lamps.findIndex(x => x.mac === lamp.mac)].on = lamp.on;},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }
-  changeBrightness(event: any, lamp: Lamp) {
+  changeBrightness(lamp: Lamp, value: number) {
     let i = this.lamps.findIndex(x => x.mac === lamp.mac);
-    this.lamps[i].brightness = this.toolCaseService.changeBrightness(event);
-    this.lampsService.updateLamp(this.lamps[i]).subscribe({
-      next: data => {this.lamps[i].brightness = lamp.brightness;console.log(this.lamps[i].brightness)},
+    lamp.brightness = value /1000;
+    this.lampsService.updateLamp(lamp).subscribe({
+      next: data => {this.lamps[i].brightness = lamp.brightness;},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }

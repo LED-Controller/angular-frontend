@@ -3,6 +3,7 @@
     <h1 id="headline"><span id="L">L</span><span id="E">E</span><span id="D">D</span><span id="-CON">-CON</span></h1>
   </div>
   <div id="button-container">
-    <button mat-raised-button color="primary" id="button" (click)="openDialog()">Mit Bridge verbinden</button>
+    <mat-spinner *ngIf="load"></mat-spinner>
+    <button *ngIf="!load" mat-raised-button color="primary" id="button" (click)="openDialog()">Mit Bridge verbinden</button>
   </div>
 </div>

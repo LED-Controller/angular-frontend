@@ -41,16 +41,8 @@
     <div *ngIf="lamp.type === neopixel">
     <mat-divider></mat-divider>
     <div class="neopixel-buttons-container">
-      <button mat-icon-button color="basic" class="random">
+      <button mat-icon-button color="basic" class="random" (click)="effect1()">
         <mat-icon>repeat</mat-icon>
-      </button>
-      <div id="spacer"></div>
-      <button mat-icon-button color="basic" class="random">
-        <mat-icon>slow_motion_video</mat-icon>
-      </button>
-      <div id="spacer"></div>
-      <button mat-icon-button color="basic" class="random">
-        <mat-icon>queue_music</mat-icon>
       </button>
     </div>
   </div>

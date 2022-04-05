@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from './token-storage.service';
+import { timeout } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class LoginService {
   getPasswordStatus(): Observable<PasswordIsAlreadySet>{
     this.getCredentials();
 
-    return this.httpClient.get<PasswordIsAlreadySet>(`http://${this.ip}:${this.port}/login/passwordstatus`);
+    return this.httpClient.get<PasswordIsAlreadySet>(`http://${this.ip}:${this.port}/login/passwordstatus`)
+    .pipe(timeout(5000));
   }
 
   setPassword(pass: Password): Observable<any>{

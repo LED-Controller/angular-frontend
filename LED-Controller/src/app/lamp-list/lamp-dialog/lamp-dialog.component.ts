@@ -156,6 +156,16 @@ export class LampDialogComponent implements OnInit {
           this.toolCaseService.isActive(error);
         }})
   }
+  effect1(){
+    this.lampsService.effect(this.lamp,'NORMAL_PARTY').subscribe({
+      next: ()=>{
+
+      },
+      error: error => {
+        console.log(error);
+      }
+    })
+  }
   onClose(){
     clearInterval(this.colorPickerRoutine);
   }
