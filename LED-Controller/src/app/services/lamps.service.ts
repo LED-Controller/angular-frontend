@@ -58,7 +58,7 @@ export class LampsService {
   }
   effect(lamp: Lamp, effectName: any): Observable<void>{
     this.getCredentials();
-    let body = `{"effectName": ${effectName},"mac": ${lamp.mac}}`
+    let body = {"effectType":effectName, "mac": lamp.mac}
     return this.httpClient.post<any>(`http://${this.ip}:${this.port}/effect`,body);
   }
 }
