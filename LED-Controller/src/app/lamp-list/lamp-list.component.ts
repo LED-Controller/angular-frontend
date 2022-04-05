@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { EditLampComponent } from './edit-lamp/edit-lamp.component';
 
+
 @Component({
   selector: 'led-lamp-list',
   templateUrl: './lamp-list.component.html',
@@ -90,6 +91,9 @@ refreshRoutine: any;
     this.lamps = newLamps;
     for (let i in newLamps){
       this.lamps[i].brightness = newLamps[i].brightness;
+      this.lamps[i].color.r = newLamps[i].color.r;
+      this.lamps[i].color.g = newLamps[i].color.g;
+      this.lamps[i].color.b = newLamps[i].color.b;
     }
   }
 
@@ -111,7 +115,7 @@ refreshRoutine: any;
     let i = this.lamps.findIndex(x => x.mac === lamp.mac);
     this.lamps[i].brightness = this.toolCaseService.changeBrightness(event);
     this.lampsService.updateLamp(this.lamps[i]).subscribe({
-      next: data => {this.lamps[i].brightness = lamp.brightness;},
+      next: data => {this.lamps[i].brightness = lamp.brightness;console.log(this.lamps[i].brightness)},
       error: error => {console.log(error);
         this.toolCaseService.isActive(error);}});
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Lamp } from '../interfaces/lamp';
 import { ToolCaseService } from '../services/tool-case.service';
 import { UnconfiguredLampsService } from '../services/unconfigured-lamps.service';
@@ -15,6 +16,7 @@ export class AddLampsComponent implements OnInit {
   constructor(private unconfiguredLampsService: UnconfiguredLampsService,
               public dialog: MatDialog,
               private toolCaseService: ToolCaseService,
+              private router: Router,
               ) { }
 
   unconfiguredLamps: string[] = [];
@@ -47,7 +49,11 @@ export class AddLampsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if(result){this.unconfiguredLamps = this.unconfiguredLamps.filter(item => item !== mac);}
+      if(result){this.unconfiguredLamps = this.unconfiguredLamps.filter(item => item !== mac);
+      if(result && this.unconfiguredLamps.length === 0){
+        this.router.navigate(['lamp-list/home']);
+      }
+      }
     });
   }
   identifyLamp(mac: string){
