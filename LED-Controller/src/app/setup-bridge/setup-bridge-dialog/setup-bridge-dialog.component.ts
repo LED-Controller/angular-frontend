@@ -39,8 +39,10 @@ export class SetupBridgeDialogComponent implements OnInit {
     this.loginService.getPasswordStatus().subscribe({
       next: data => {this.login.pwStatus = data.passwordIsAlreadySet;
         this.status="loaded";
+        alert('Success')
       },
       error: error => {console.log(error);
+        alert(error.status+ ' : ' +error.statusText)
       this.status="error";
       this.i = 0;
       let routine = setInterval(() => {

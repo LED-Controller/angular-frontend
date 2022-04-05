@@ -14,9 +14,10 @@
     <mat-divider></mat-divider>
     <div class="card-container" *ngFor="let lamp of lamps" (click)="focuse(lamp)">
       <mat-card
-        [style]="lamp.mac === this.selectedItemMac && lamp.online === true ? 'border-style: solid;border-color: #0e73f6;' : ''"
         (click)="index = lamp.mac" [ngClass]="{'card-offline': (lamp.online === false)}"
-        [style.background]="lamp.online ? (lamp.brightness < 10 ? (lamp.brightness == 0 ? 'rgba(255,255, 255, 0.02)' : 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.2)' ): 'rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.8)') : 'rgba(255,255, 255, 0.02)'">
+        [style]="lamp.online ? (lamp.on ? (lamp.brightness < 70 ? 'background-image: linear-gradient(to right,rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+','+lamp.brightness/100+'),rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+','+lamp.brightness/100+'))':'background-image: linear-gradient(to right,rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.7),rgba('+lamp.color.r+','+lamp.color.g+','+lamp.color.b+',0.7))'): 'background-image: linear-gradient(to right,rgba(255,255, 255,0),rgba(255,255, 255,0)') : 'background-image: linear-gradient(to right,rgba(255,255, 255, 0),rgba(255,255, 255,0)'"
+        [style.border-style]="lamp.mac === this.selectedItemMac && lamp.online === true ? 'solid' : ''"
+        [style.border-color]="lamp.mac === this.selectedItemMac && lamp.online === true ? '#0e73f6' : ''">
         <button mat-mini-fab color="primary" class="edit-card" *ngIf="index === lamp.mac"
           (click)="openEditDialog(lamp)">
           <mat-icon class="edit-icon">edit</mat-icon>
