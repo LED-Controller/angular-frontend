@@ -37,15 +37,16 @@
         </mat-slider>
     </div>
   </div>
+  <mat-divider></mat-divider>
   <div class="neopixel">
-    <div *ngIf="lamp.type === neopixel">
-    <mat-divider></mat-divider>
     <div class="neopixel-buttons-container">
       <button mat-icon-button color="basic" class="random" (click)="effect1()">
-        <mat-icon>repeat</mat-icon>
+        <mat-icon> local_bar</mat-icon>
+      </button>
+      <button *ngIf="lamp.type === neopixel" mat-icon-button color="basic" class="random" (click)="effect2()">
+        <mat-icon>gesture</mat-icon>
       </button>
     </div>
-  </div>
   </div>
   <mat-divider></mat-divider>
   <div class="submit-button">

@@ -158,12 +158,14 @@ export class LampDialogComponent implements OnInit {
   }
   effect1(){
     this.lampsService.effect(this.lamp,'NORMAL_PARTY').subscribe({
-      next: ()=>{
-
-      },
-      error: error => {
-        console.log(error);
-      }
+      next: ()=>{},
+      error: error => {console.log(error);}
+    })
+  }
+  effect2(){
+    this.lampsService.effect(this.lamp,'RAINBOW').subscribe({
+      next: ()=>{},
+      error: error => {console.log(error);}
     })
   }
   onClose(){
